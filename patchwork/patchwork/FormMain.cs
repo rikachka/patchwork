@@ -15,7 +15,7 @@ namespace patchwork
         Brush[] COLR = { Brushes.Aqua, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Green, Brushes.Azure, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue, Brushes.PapayaWhip };
         Bitmap[] Cirpich;
         Graphics c;
-        Bitmap POLE = new Bitmap(300, 300);
+        Bitmap POLE; // = new Bitmap(300, 300);
         byte[,] Area = new byte[10, 21];
 
         public FormMain()
@@ -61,6 +61,51 @@ namespace patchwork
             //            e.Graphics.DrawImage(Cirpich[Area[x, y]], x * 21 + 1, y * 21 + 1);
             //        }
             //    }
+            //}
+        }
+
+        private void PanelPlayer_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(POLE, 0, 0);
+        }
+
+        private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
+        {
+            int margin = 5;
+            int panel_width = this.PanelPlayer.Width - margin * 2,
+                panel_height = this.PanelPlayer.Height -  margin * 2,
+                squares_number = 9;
+            int board_length = panel_width < panel_height ? panel_width : panel_height;
+            int square_length = board_length / squares_number;
+            board_length = square_length * squares_number;
+            int margin_width = (panel_width - board_length) / 2 + margin;
+            int margin_height = (panel_height - board_length) / 2 + margin;
+
+            POLE = new Bitmap(this.PanelPlayer.Width, this.PanelPlayer.Height);
+            c = Graphics.FromImage(POLE);
+            c.FillRectangle(new SolidBrush(Color.Green), margin_width, margin_height, board_length, board_length);
+            for (int i = 0; i <= squares_number; i++) {
+                c.DrawLine(new Pen(Color.Black), 
+                    margin_width + i * square_length, 
+                    margin_height, 
+                    margin_width + i * square_length, 
+                    margin_height + board_length);
+            }
+            for (int i = 0; i <= squares_number; i++) {
+                c.DrawLine(new Pen(Color.Black), 
+                    margin_width, 
+                    margin_height + i * square_length, 
+                    margin_width + board_length, 
+                    margin_height + i * square_length);
+            }
+            //Cirpich = new Bitmap[COLR.Length];
+            //for (int i = 0; i < COLR.Length; i++)
+            //{
+            //    Cirpich[i] = new Bitmap(21, 21);
+            //    c = Graphics.FromImage(Cirpich[i]);
+            //    c.FillRectangle(COLR[i], 0, 0, 21, 21);
+            //    c.DrawLine(new Pen(Color.FromArgb(70, Color.Black), 2), new Point(1, 20), new Point(20, 20));
+            //    c.DrawLine(new Pen(Color.FromArgb(70, Color.Black), 2), new Point(20, 20), new Point(20, 1));
             //}
         }
     }
