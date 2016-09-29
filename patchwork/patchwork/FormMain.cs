@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace patchwork
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         Brush[] COLR = { Brushes.Aqua, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Green, Brushes.Azure, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue, Brushes.PapayaWhip };
         Bitmap[] Cirpich;
@@ -18,12 +18,12 @@ namespace patchwork
         Bitmap POLE = new Bitmap(300, 300);
         byte[,] Area = new byte[10, 21];
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FormMain_Load(object sender, EventArgs e)
         {
             //c = Graphics.FromImage(POLE);
             //c.FillRectangle(new SolidBrush(Color.FromArgb(0, 45, 45)), 0, 0, 210 + 4, 420 + 4);
@@ -40,22 +40,7 @@ namespace patchwork
             //}
         }
 
-        private void MainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void FormMain_Paint(object sender, PaintEventArgs e)
         {
             //e.Graphics.DrawImage(POLE, 0, 0);
             //if (fig != null)
@@ -77,21 +62,6 @@ namespace patchwork
             //        }
             //    }
             //}
-        }
-
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel_opponent_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
