@@ -10,7 +10,7 @@ namespace patchwork
 {
     class Patch
     {
-        int[,] info;
+        public int[,] info;
         int price;
         int time;
         int income;
@@ -21,6 +21,21 @@ namespace patchwork
             price = price_;
             time = time_;
             income = income_;
+        }
+
+        public int GetHeight()
+        {
+            return info.GetLength(0);
+        }
+
+        public int GetWidth()
+        {
+            return info.GetLength(1);
+        }
+
+        public bool IsTaken(int i, int j)
+        {
+            return info[i, j] == 1;
         }
     }
 
@@ -35,6 +50,7 @@ namespace patchwork
         {
             panel_patches = panel_patches_;
             CreatePatches();
+            ShufflePatches();
         }
 
         void CreatePatches()
@@ -75,6 +91,21 @@ namespace patchwork
             patches[32] = new Patch(new int[,] { { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 } }, 2, 3, 0);
         }
 
+        void ShufflePatches()
+        {
+            var random = new Random(123);
+            patches = patches.OrderBy(x => random.Next()).ToArray();
+            for (int i = 0; i < patches.Length; i++)
+            {
+                Patch patch = patches[i];
+                if (patch.GetWidth() == 1 && patch.GetHeight() == 2)
+                {
+                    patches[i] = patches[0];
+                    patches[0] = patch;
+                }
+            }
+        }
+
         public void Paint(PaintEventArgs e)
         {
             int margin = 5;
@@ -91,6 +122,16 @@ namespace patchwork
             POLE = new Bitmap(panel_patches.Width, panel_patches.Height);
             c = Graphics.FromImage(POLE);
             //c.FillRectangle(new SolidBrush(Color.Green), margin_width, margin_height, board_width, board_height);
+            PaintField(squares_number_width, squares_number_height, square_length,
+                margin_width, margin_height, board_width, board_height);
+            PaintPatches(squares_number_width, margin_width, margin_height, square_length);
+
+            e.Graphics.DrawImage(POLE, 0, 0);
+        }
+
+        void PaintField(int squares_number_width, int squares_number_height, int square_length, 
+            int margin_width, int margin_height, int board_width, int board_height)
+        {
             for (int i = 0; i <= squares_number_width; i++)
             {
                 c.DrawLine(new Pen(Color.Black),
@@ -107,7 +148,42 @@ namespace patchwork
                     margin_width + board_width,
                     margin_height + i * square_length);
             }
-            e.Graphics.DrawImage(POLE, 0, 0);
+        }
+
+        void PaintPatches(int squares_number_width, int margin_width, int margin_height, int square_length)
+        {
+            int taken_squares_in_width = 0;
+            for (int patch_index = 0; patch_index < patches.Length; patch_index++)
+            {
+                Patch patch = patches[patch_index];
+
+                if (patch.GetWidth() + taken_squares_in_width > squares_number_width)
+                {
+                    break;
+                }
+
+                int margin_squares = 0;
+                if (patch.GetHeight() <= 3)
+                {
+                    margin_squares = 1;
+                }
+
+                for (int i = 0; i < patch.GetHeight(); i++)
+                {
+                    for (int j = 0; j < patch.GetWidth(); j++)
+                    {
+                        if (patch.IsTaken(i, j))
+                        {
+                            c.FillRectangle(new SolidBrush(Color.Green),
+                                margin_width + (taken_squares_in_width + j) * square_length,
+                                margin_height + (margin_squares + i) * square_length,
+                                square_length,
+                                square_length);
+                        }
+                    }
+                }
+                taken_squares_in_width += patch.GetWidth() + 1;
+            }
         }
     }
 }
