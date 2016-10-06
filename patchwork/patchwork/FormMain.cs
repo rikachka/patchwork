@@ -20,6 +20,7 @@ namespace patchwork
 
         PlayerBoard player_board;
         PlayerBoard opponent_board;
+        Patches patches;
 
         public FormMain()
         {
@@ -47,6 +48,8 @@ namespace patchwork
         {
             this.PanelPlayer.Invalidate();
             this.PanelOpponent.Invalidate();
+            this.PanelBoard.Invalidate();
+            this.PanelPatches.Invalidate();
 
             //e.Graphics.DrawImage(POLE, 0, 0);
             //if (fig != null)
@@ -72,7 +75,7 @@ namespace patchwork
 
         private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
         {
-            player_board = new PlayerBoard(this.PanelPlayer, this.PanelPlayerInfo);
+            player_board = new PlayerBoard(this.TableLayoutPanelPlayer);
             
 
             /*Cirpich = new Bitmap[COLR.Length];
@@ -93,12 +96,22 @@ namespace patchwork
 
         private void PanelOpponent_Layout(object sender, LayoutEventArgs e)
         {
-            opponent_board = new PlayerBoard(this.PanelOpponent, this.PanelOpponentInfo);
+            opponent_board = new PlayerBoard(this.TableLayoutPanelOpponent);
         }
 
         private void PanelOpponent_Paint(object sender, PaintEventArgs e)
         {
             opponent_board.Paint(e);
+        }
+
+        private void PanelPatches_Layout(object sender, LayoutEventArgs e)
+        {
+            patches = new Patches(this.PanelPatches);
+        }
+
+        private void PanelPatches_Paint(object sender, PaintEventArgs e)
+        {
+            patches.Paint(e);
         }
     }
 }

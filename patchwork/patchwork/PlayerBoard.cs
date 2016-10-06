@@ -10,15 +10,22 @@ namespace patchwork
 {
     class PlayerBoard
     {
+        TableLayoutPanel panel_player;
         Panel panel_board;
-        Panel panel_info;
+        Panel panel_points;
+        Panel panel_prize;
+        Panel panel_income;
         Graphics c;
         Bitmap POLE;
 
-        public PlayerBoard(Panel panel_board_, Panel panel_info_)
+        public PlayerBoard(TableLayoutPanel panel_player_)
         {
-            panel_board = panel_board_;
-            panel_info = panel_info_;
+            panel_player = panel_player_;
+            panel_board = (Panel) panel_player.GetControlFromPosition(0, 0);
+            panel_points = (Panel)panel_player.GetControlFromPosition(0, 1);
+            panel_prize = (Panel)panel_player.GetControlFromPosition(1, 1);
+            panel_income = (Panel)panel_player.GetControlFromPosition(2, 1);
+            //panel_info = panel_info_;
         }
 
         public void Paint(PaintEventArgs e)
