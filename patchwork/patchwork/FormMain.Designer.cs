@@ -68,19 +68,19 @@
             // MenuItemGameNew
             // 
             this.MenuItemGameNew.Name = "MenuItemGameNew";
-            this.MenuItemGameNew.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemGameNew.Size = new System.Drawing.Size(98, 22);
             this.MenuItemGameNew.Text = "New";
             // 
             // MenuItemGameSave
             // 
             this.MenuItemGameSave.Name = "MenuItemGameSave";
-            this.MenuItemGameSave.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemGameSave.Size = new System.Drawing.Size(98, 22);
             this.MenuItemGameSave.Text = "Save";
             // 
             // MenuItemGameExit
             // 
             this.MenuItemGameExit.Name = "MenuItemGameExit";
-            this.MenuItemGameExit.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemGameExit.Size = new System.Drawing.Size(98, 22);
             this.MenuItemGameExit.Text = "Exit";
             // 
             // MenuItemInfo
@@ -95,13 +95,13 @@
             // MenuItemInfoRules
             // 
             this.MenuItemInfoRules.Name = "MenuItemInfoRules";
-            this.MenuItemInfoRules.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemInfoRules.Size = new System.Drawing.Size(107, 22);
             this.MenuItemInfoRules.Text = "Rules";
             // 
             // MenuItemInfoAbout
             // 
             this.MenuItemInfoAbout.Name = "MenuItemInfoAbout";
-            this.MenuItemInfoAbout.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemInfoAbout.Size = new System.Drawing.Size(107, 22);
             this.MenuItemInfoAbout.Text = "About";
             // 
             // PanelPlayer
@@ -125,6 +125,8 @@
             this.PanelOpponent.Name = "PanelOpponent";
             this.PanelOpponent.Size = new System.Drawing.Size(222, 248);
             this.PanelOpponent.TabIndex = 2;
+            this.PanelOpponent.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponent_Paint);
+            this.PanelOpponent.Layout += new System.Windows.Forms.LayoutEventHandler(this.PanelOpponent_Layout);
             // 
             // PanelBoard
             // 
