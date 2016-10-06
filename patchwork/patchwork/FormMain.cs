@@ -72,7 +72,7 @@ namespace patchwork
 
         private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
         {
-            player_board = new PlayerBoard(this.PanelPlayer);
+            player_board = new PlayerBoard(this.PanelPlayer, this.PanelPlayerInfo);
             
 
             /*Cirpich = new Bitmap[COLR.Length];
@@ -93,7 +93,7 @@ namespace patchwork
 
         private void PanelOpponent_Layout(object sender, LayoutEventArgs e)
         {
-            opponent_board = new PlayerBoard(this.PanelOpponent);
+            opponent_board = new PlayerBoard(this.PanelOpponent, this.PanelOpponentInfo);
         }
 
         private void PanelOpponent_Paint(object sender, PaintEventArgs e)

@@ -10,20 +10,22 @@ namespace patchwork
 {
     class PlayerBoard
     {
-        Panel panel_player;
+        Panel panel_board;
+        Panel panel_info;
         Graphics c;
         Bitmap POLE;
 
-        public PlayerBoard(Panel panel_player_)
+        public PlayerBoard(Panel panel_board_, Panel panel_info_)
         {
-            panel_player = panel_player_;
+            panel_board = panel_board_;
+            panel_info = panel_info_;
         }
 
         public void Paint(PaintEventArgs e)
         {
             int margin = 5;
-            int panel_width = panel_player.Width - margin * 2,
-                panel_height = panel_player.Height - margin * 2,
+            int panel_width = panel_board.Width - margin * 2,
+                panel_height = panel_board.Height - margin * 2,
                 squares_number = 9;
             int board_length = panel_width < panel_height ? panel_width : panel_height;
             int square_length = board_length / squares_number;
@@ -31,7 +33,7 @@ namespace patchwork
             int margin_width = (panel_width - board_length) / 2 + margin;
             int margin_height = (panel_height - board_length) / 2 + margin;
 
-            POLE = new Bitmap(panel_player.Width, panel_player.Height);
+            POLE = new Bitmap(panel_board.Width, panel_board.Height);
             c = Graphics.FromImage(POLE);
             c.FillRectangle(new SolidBrush(Color.Green), margin_width, margin_height, board_length, board_length);
             for (int i = 0; i <= squares_number; i++)

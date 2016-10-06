@@ -41,6 +41,9 @@
             this.PanelBoard = new System.Windows.Forms.Panel();
             this.TableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.PanelPatches = new System.Windows.Forms.Panel();
+            this.PanelPlayerInfo = new System.Windows.Forms.Panel();
+            this.PanelBoardInfo = new System.Windows.Forms.Panel();
+            this.PanelOpponentInfo = new System.Windows.Forms.Panel();
             this.MenuMain.SuspendLayout();
             this.TableLayoutPanelMain.SuspendLayout();
             this.SuspendLayout();
@@ -109,9 +112,9 @@
             this.PanelPlayer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelPlayer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelPlayer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelPlayer.Location = new System.Drawing.Point(3, 111);
+            this.PanelPlayer.Location = new System.Drawing.Point(3, 93);
             this.PanelPlayer.Name = "PanelPlayer";
-            this.PanelPlayer.Size = new System.Drawing.Size(222, 248);
+            this.PanelPlayer.Size = new System.Drawing.Size(221, 229);
             this.PanelPlayer.TabIndex = 1;
             this.PanelPlayer.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPlayer_Paint);
             this.PanelPlayer.Layout += new System.Windows.Forms.LayoutEventHandler(this.PanelPlayer_Layout);
@@ -121,9 +124,9 @@
             this.PanelOpponent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.PanelOpponent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelOpponent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelOpponent.Location = new System.Drawing.Point(459, 111);
+            this.PanelOpponent.Location = new System.Drawing.Point(457, 93);
             this.PanelOpponent.Name = "PanelOpponent";
-            this.PanelOpponent.Size = new System.Drawing.Size(222, 248);
+            this.PanelOpponent.Size = new System.Drawing.Size(224, 229);
             this.PanelOpponent.TabIndex = 2;
             this.PanelOpponent.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponent_Paint);
             this.PanelOpponent.Layout += new System.Windows.Forms.LayoutEventHandler(this.PanelOpponent_Layout);
@@ -133,9 +136,9 @@
             this.PanelBoard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.PanelBoard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelBoard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelBoard.Location = new System.Drawing.Point(231, 111);
+            this.PanelBoard.Location = new System.Drawing.Point(230, 93);
             this.PanelBoard.Name = "PanelBoard";
-            this.PanelBoard.Size = new System.Drawing.Size(222, 248);
+            this.PanelBoard.Size = new System.Drawing.Size(221, 229);
             this.PanelBoard.TabIndex = 2;
             // 
             // TableLayoutPanelMain
@@ -148,14 +151,17 @@
             this.TableLayoutPanelMain.Controls.Add(this.PanelBoard, 1, 1);
             this.TableLayoutPanelMain.Controls.Add(this.PanelPlayer, 0, 1);
             this.TableLayoutPanelMain.Controls.Add(this.PanelPatches, 0, 0);
+            this.TableLayoutPanelMain.Controls.Add(this.PanelPlayerInfo, 0, 2);
+            this.TableLayoutPanelMain.Controls.Add(this.PanelBoardInfo, 1, 2);
+            this.TableLayoutPanelMain.Controls.Add(this.PanelOpponentInfo, 2, 2);
             this.TableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
             this.TableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(3, 27, 3, 3);
             this.TableLayoutPanelMain.Name = "TableLayoutPanelMain";
-            this.TableLayoutPanelMain.RowCount = 2;
-            this.TableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.TableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.TableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.TableLayoutPanelMain.RowCount = 3;
+            this.TableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.TableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
+            this.TableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TableLayoutPanelMain.Size = new System.Drawing.Size(684, 362);
             this.TableLayoutPanelMain.TabIndex = 3;
             // 
@@ -168,8 +174,38 @@
             this.PanelPatches.Location = new System.Drawing.Point(3, 27);
             this.PanelPatches.Margin = new System.Windows.Forms.Padding(3, 27, 3, 3);
             this.PanelPatches.Name = "PanelPatches";
-            this.PanelPatches.Size = new System.Drawing.Size(678, 78);
+            this.PanelPatches.Size = new System.Drawing.Size(678, 60);
             this.PanelPatches.TabIndex = 3;
+            // 
+            // PanelPlayerInfo
+            // 
+            this.PanelPlayerInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.PanelPlayerInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelPlayerInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelPlayerInfo.Location = new System.Drawing.Point(3, 328);
+            this.PanelPlayerInfo.Name = "PanelPlayerInfo";
+            this.PanelPlayerInfo.Size = new System.Drawing.Size(221, 31);
+            this.PanelPlayerInfo.TabIndex = 4;
+            // 
+            // PanelBoardInfo
+            // 
+            this.PanelBoardInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.PanelBoardInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelBoardInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelBoardInfo.Location = new System.Drawing.Point(230, 328);
+            this.PanelBoardInfo.Name = "PanelBoardInfo";
+            this.PanelBoardInfo.Size = new System.Drawing.Size(221, 31);
+            this.PanelBoardInfo.TabIndex = 5;
+            // 
+            // PanelOpponentInfo
+            // 
+            this.PanelOpponentInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.PanelOpponentInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelOpponentInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelOpponentInfo.Location = new System.Drawing.Point(457, 328);
+            this.PanelOpponentInfo.Name = "PanelOpponentInfo";
+            this.PanelOpponentInfo.Size = new System.Drawing.Size(224, 31);
+            this.PanelOpponentInfo.TabIndex = 6;
             // 
             // FormMain
             // 
@@ -206,6 +242,9 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemInfoRules;
         private System.Windows.Forms.ToolStripMenuItem MenuItemInfoAbout;
         private System.Windows.Forms.Panel PanelPatches;
+        private System.Windows.Forms.Panel PanelPlayerInfo;
+        private System.Windows.Forms.Panel PanelBoardInfo;
+        private System.Windows.Forms.Panel PanelOpponentInfo;
     }
 }
 
