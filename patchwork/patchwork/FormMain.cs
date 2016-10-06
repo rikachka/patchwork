@@ -15,7 +15,7 @@ namespace patchwork
         Brush[] COLR = { Brushes.Aqua, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Green, Brushes.Azure, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue, Brushes.PapayaWhip };
         Bitmap[] Cirpich;
         Graphics c;
-        Bitmap POLE; // = new Bitmap(300, 300);
+        Bitmap POLE; 
         byte[,] Area = new byte[10, 21];
 
         PlayerBoard player_board;
@@ -46,6 +46,7 @@ namespace patchwork
         private void FormMain_Paint(object sender, PaintEventArgs e)
         {
             this.PanelPlayer.Invalidate();
+            this.PanelOpponent.Invalidate();
 
             //e.Graphics.DrawImage(POLE, 0, 0);
             //if (fig != null)
@@ -69,11 +70,6 @@ namespace patchwork
             //}
         }
 
-        private void PanelPlayer_Paint(object sender, PaintEventArgs e)
-        {
-            player_board.Paint(e);
-        }
-
         private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
         {
             player_board = new PlayerBoard(this.PanelPlayer);
@@ -88,6 +84,11 @@ namespace patchwork
                 c.DrawLine(new Pen(Color.FromArgb(70, Color.Black), 2), new Point(1, 20), new Point(20, 20));
                 c.DrawLine(new Pen(Color.FromArgb(70, Color.Black), 2), new Point(20, 20), new Point(20, 1));
             }*/
+        }
+
+        private void PanelPlayer_Paint(object sender, PaintEventArgs e)
+        {
+            player_board.Paint(e);
         }
 
         private void PanelOpponent_Layout(object sender, LayoutEventArgs e)
