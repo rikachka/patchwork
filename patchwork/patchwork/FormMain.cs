@@ -50,28 +50,8 @@ namespace patchwork
             this.PanelOpponent.Invalidate();
             this.PanelBoard.Invalidate();
             this.PanelPatches.Invalidate();
-
-            //e.Graphics.DrawImage(POLE, 0, 0);
-            //if (fig != null)
-            //{
-            //    for (int x = 0; x < 4; x++)
-            //        for (int y = 0; y < 4; y++)
-            //        {
-            //            if (fig.pic[x, y])
-            //                e.Graphics.DrawImage(Cirpich[fig.Col], (fig.x + x) * 21 + 1, (fig.y + y) * 21 + 1);
-            //        }
-            //}
-            //for (int x = 0; x < 9; x++)
-            //{
-            //    for (int y = 0; y < 9; y++)
-            //    {
-            //        if (Area[x, y] > 0)
-            //        {
-            //            e.Graphics.DrawImage(Cirpich[Area[x, y]], x * 21 + 1, y * 21 + 1);
-            //        }
-            //    }
-            //}
-        }
+			patches.PaintTakenPatch(e);
+		}
 
         private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
         {
@@ -106,12 +86,39 @@ namespace patchwork
 
         private void PanelPatches_Layout(object sender, LayoutEventArgs e)
         {
-            patches = new Patches(this.PanelPatches);
+            patches = new Patches(this.PanelPatches, this.TableLayoutPanelMain);
         }
 
         private void PanelPatches_Paint(object sender, PaintEventArgs e)
         {
             patches.Paint(e);
         }
-    }
+
+        private void PanelPatches_MouseDown(object sender, MouseEventArgs e)
+        {
+            patches.TakeOne(e.X, e.Y);
+			this.PanelPatches.Invalidate();
+		}
+
+		private void PanelPatches_MouseUp(object sender, MouseEventArgs e)
+		{
+			patches.PutOne(e.X, e.Y);
+			this.PanelPatches.Invalidate();
+		}
+
+		private void PanelPatches_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (patches.IsPatchTaken()) {
+				patches.MoveOne(e.X, e.Y);
+				//this.PanelPatches.Invalidate();
+				//this.TableLayoutPanelMain.Invalidate();
+				Invalidate();
+			}
+		}
+
+		private void TableLayoutPanelMain_Paint(object sender, PaintEventArgs e)
+		{
+			//patches.PaintTakenPatch(e);
+		}
+	}
 }
