@@ -163,7 +163,7 @@ namespace patchwork
 
 			e.Graphics.DrawImage(POLE, 0, 0);
 
-			PaintTakenPatch(e);
+			//PaintTakenPatch(e);
 		}
 
 		void PaintField(int squares_number_width, int squares_number_height, int square_length, 
@@ -351,6 +351,8 @@ namespace patchwork
 					mouse_position.X - patch_width / 2,
 					mouse_position.Y - patch_height / 2,
 					square_length);
+
+				//e.Graphics.Dispose();
 				e.Graphics.DrawImage(taken_patch_pole, 0, 0);
 			}
 		}

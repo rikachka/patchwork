@@ -327,6 +327,7 @@
 			this.MainMenuStrip = this.MenuMain;
 			this.Name = "FormMain";
 			this.Text = "Patchwork";
+			this.TransparencyKey = System.Drawing.Color.Lime;
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormMain_Paint);
 			this.MenuMain.ResumeLayout(false);
@@ -365,6 +366,6 @@
         private System.Windows.Forms.Panel PanelOpponentPrize;
         private System.Windows.Forms.Panel PanelOpponentIncome;
         private System.Windows.Forms.Panel PanelBoardPrize;
-    }
+	}
 }
 

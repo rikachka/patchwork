@@ -10,7 +10,49 @@ using System.Windows.Forms;
 
 namespace patchwork
 {
-    public partial class FormMain : Form
+	public class ExtendedPanel : Panel
+	{
+		private const int WS_EX_TRANSPARENT = 0x20;
+		public ExtendedPanel()
+		{
+			SetStyle(ControlStyles.Opaque, true);
+		}
+
+		//private int opacity = 50;
+		//[DefaultValue(50)]
+		//public int Opacity
+		//{
+		//	get
+		//	{
+		//		return this.opacity;
+		//	}
+		//	set
+		//	{
+		//		if (value < 0 || value > 100)
+		//			throw new ArgumentException("value must be between 0 and 100");
+		//		this.opacity = value;
+		//	}
+		//}
+		protected override CreateParams CreateParams
+		{
+			get
+			{
+				CreateParams cp = base.CreateParams;
+				cp.ExStyle = cp.ExStyle | WS_EX_TRANSPARENT;
+				return cp;
+			}
+		}
+		//protected override void OnPaint(PaintEventArgs e)
+		//{
+		//	using (var brush = new SolidBrush(Color.FromArgb(this.opacity * 255 / 100, this.BackColor)))
+		//	{
+		//		e.Graphics.FillRectangle(brush, this.ClientRectangle);
+		//	}
+		//	base.OnPaint(e);
+		//}
+	}
+
+	public partial class FormMain : Form
     {
         Brush[] COLR = { Brushes.Aqua, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Green, Brushes.Azure, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue, Brushes.PapayaWhip };
         Bitmap[] Cirpich;
@@ -22,10 +64,24 @@ namespace patchwork
         PlayerBoard opponent_board;
         Patches patches;
 
-        public FormMain()
+		ExtendedPanel PanelOver = new ExtendedPanel();
+		//Panel PanelOver = new Panel();
+
+		public FormMain()
         {
             InitializeComponent();
-        }
+			
+
+			PanelOver.BackColor = Color.Blue;
+			//PanelOver.Opacity = 5;
+			//PanelOver.TransparencyKey = Color.Blue;
+			//PanelOver.BackColor = Color.FromArgb(0, Color.Red);
+			PanelOver.Size = new Size(this.Width, this.Height);
+			//PanelOver.SetStyle(ControlStyles.Opaque, true);
+			PanelOver.Paint += new PaintEventHandler(this.PanelOver_Paint);
+			//this.Controls.Add(PanelOver);
+			//PanelOver.BringToFront();
+		}
 
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -50,7 +106,14 @@ namespace patchwork
             this.PanelOpponent.Invalidate();
             this.PanelBoard.Invalidate();
             this.PanelPatches.Invalidate();
-			patches.PaintTakenPatch(e);
+
+			//Panel PanelOver = new Panel();
+			//PanelOver.BackColor = Color.Transparent;
+			//PanelOver.Size = new Size(this.Width, this.Height);
+			////PanelOver.Invalidate();
+			//this.Controls.Add(PanelOver);
+			//PanelOver.BringToFront();
+			//patches.PaintTakenPatch(e);
 		}
 
         private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
@@ -91,19 +154,40 @@ namespace patchwork
 
         private void PanelPatches_Paint(object sender, PaintEventArgs e)
         {
-            patches.Paint(e);
-        }
+			//if (patches.IsPatchTaken())
+			//{
+			//	patches.PaintTakenPatch(e);
+			//}
+			//else
+			//{
+				patches.Paint(e);
+			//}
+		}
 
-        private void PanelPatches_MouseDown(object sender, MouseEventArgs e)
+		private void PanelOver_Paint(object sender, PaintEventArgs e)
+		{
+			patches.PaintTakenPatch(e);
+		}
+
+		private void PanelPatches_MouseDown(object sender, MouseEventArgs e)
         {
             patches.TakeOne(e.X, e.Y);
-			this.PanelPatches.Invalidate();
+			//this.PanelPatches.Invalidate();
+
+			this.Controls.Add(PanelOver);
+			PanelOver.BringToFront();
+			//PanelOver.Invalidate();
 		}
 
 		private void PanelPatches_MouseUp(object sender, MouseEventArgs e)
 		{
 			patches.PutOne(e.X, e.Y);
-			this.PanelPatches.Invalidate();
+			//this.PanelPatches.Invalidate();
+
+
+			this.Controls.Remove(PanelOver);
+			//PanelOver.BringToFront();
+			//PanelOver.Invalidate();
 		}
 
 		private void PanelPatches_MouseMove(object sender, MouseEventArgs e)
@@ -111,8 +195,12 @@ namespace patchwork
 			if (patches.IsPatchTaken()) {
 				patches.MoveOne(e.X, e.Y);
 				//this.PanelPatches.Invalidate();
-				//this.TableLayoutPanelMain.Invalidate();
-				Invalidate();
+
+				//this.Controls.Remove(PanelOver);
+				//this.Controls.Add(PanelOver);
+				//PanelOver.BringToFront();
+				PanelOver.Invalidate();
+				//Invalidate();
 			}
 		}
 
