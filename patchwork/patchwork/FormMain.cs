@@ -16,6 +16,7 @@ namespace patchwork
 		public ExtendedPanel()
 		{
 			SetStyle(ControlStyles.Opaque, true);
+			SetStyle(ControlStyles.UserPaint, true);
 		}
 
 		//private int opacity = 50;
@@ -38,7 +39,7 @@ namespace patchwork
 			get
 			{
 				CreateParams cp = base.CreateParams;
-				cp.ExStyle = cp.ExStyle | WS_EX_TRANSPARENT;
+				cp.ExStyle |= WS_EX_TRANSPARENT;
 				return cp;
 			}
 		}
@@ -52,6 +53,118 @@ namespace patchwork
 		//}
 	}
 
+
+
+	public class TranspCtrl : Panel
+	{
+		public bool drag = false;
+		public bool enab = false;
+		private int m_opacity = 100;
+
+		private int alpha;
+		public TranspCtrl()
+		{
+			SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+			SetStyle(ControlStyles.Opaque, true);
+			this.BackColor = Color.Transparent;
+		}
+
+		public int Opacity
+		{
+			get
+			{
+				if (m_opacity > 100)
+				{
+					m_opacity = 100;
+				}
+				else if (m_opacity < 1)
+				{
+					m_opacity = 1;
+				}
+				return this.m_opacity;
+			}
+			set
+			{
+				this.m_opacity = value;
+				if (this.Parent != null)
+				{
+					Parent.Invalidate(this.Bounds, true);
+				}
+			}
+		}
+
+		protected override CreateParams CreateParams
+		{
+			get
+			{
+				CreateParams cp = base.CreateParams;
+				cp.ExStyle = cp.ExStyle | 0x20;
+				return cp;
+			}
+		}
+
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			Graphics g = e.Graphics;
+			Rectangle bounds = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
+
+			Color frmColor = this.Parent.BackColor;
+			Brush bckColor = default(Brush);
+
+			alpha = (m_opacity * 255) / 100;
+
+			if (drag)
+			{
+				Color dragBckColor = default(Color);
+
+				if (BackColor != Color.Transparent)
+				{
+					int Rb = BackColor.R * alpha / 255 + frmColor.R * (255 - alpha) / 255;
+					int Gb = BackColor.G * alpha / 255 + frmColor.G * (255 - alpha) / 255;
+					int Bb = BackColor.B * alpha / 255 + frmColor.B * (255 - alpha) / 255;
+					dragBckColor = Color.FromArgb(Rb, Gb, Bb);
+				}
+				else
+				{
+					dragBckColor = frmColor;
+				}
+
+				alpha = 255;
+				bckColor = new SolidBrush(Color.FromArgb(alpha, dragBckColor));
+			}
+			else
+			{
+				bckColor = new SolidBrush(Color.FromArgb(alpha, this.BackColor));
+			}
+
+			if (this.BackColor != Color.Transparent | drag)
+			{
+				g.FillRectangle(bckColor, bounds);
+			}
+
+			bckColor.Dispose();
+			//g.Dispose();
+			base.OnPaint(e);
+		}
+
+		protected override void OnBackColorChanged(EventArgs e)
+		{
+			if (this.Parent != null)
+			{
+				Parent.Invalidate(this.Bounds, true);
+			}
+			base.OnBackColorChanged(e);
+		}
+
+		protected override void OnParentBackColorChanged(EventArgs e)
+		{
+			this.Invalidate();
+			base.OnParentBackColorChanged(e);
+		}
+	}
+
+
+
 	public partial class FormMain : Form
     {
         Brush[] COLR = { Brushes.Aqua, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Green, Brushes.Azure, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue, Brushes.PapayaWhip };
@@ -64,6 +177,7 @@ namespace patchwork
         PlayerBoard opponent_board;
         Patches patches;
 
+		//TranspCtrl PanelOver = new TranspCtrl();
 		ExtendedPanel PanelOver = new ExtendedPanel();
 		//Panel PanelOver = new Panel();
 
@@ -72,8 +186,8 @@ namespace patchwork
             InitializeComponent();
 			
 
-			PanelOver.BackColor = Color.Blue;
-			//PanelOver.Opacity = 5;
+			PanelOver.BackColor = Color.Transparent;
+			//PanelOver.Opacity = 50;
 			//PanelOver.TransparencyKey = Color.Blue;
 			//PanelOver.BackColor = Color.FromArgb(0, Color.Red);
 			PanelOver.Size = new Size(this.Width, this.Height);
@@ -81,6 +195,10 @@ namespace patchwork
 			PanelOver.Paint += new PaintEventHandler(this.PanelOver_Paint);
 			//this.Controls.Add(PanelOver);
 			//PanelOver.BringToFront();
+
+			this.Controls.Add(PanelOver);
+			PanelOver.BringToFront();
+			PanelOver.Hide();
 		}
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -107,6 +225,9 @@ namespace patchwork
             this.PanelBoard.Invalidate();
             this.PanelPatches.Invalidate();
 
+			//PanelOver.BringToFront();
+			//this.PanelOver.Invalidate();
+
 			//Panel PanelOver = new Panel();
 			//PanelOver.BackColor = Color.Transparent;
 			//PanelOver.Size = new Size(this.Width, this.Height);
@@ -116,7 +237,7 @@ namespace patchwork
 			//patches.PaintTakenPatch(e);
 		}
 
-        private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
+		private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
         {
             player_board = new PlayerBoard(this.TableLayoutPanelPlayer);
             
@@ -174,9 +295,13 @@ namespace patchwork
             patches.TakeOne(e.X, e.Y);
 			//this.PanelPatches.Invalidate();
 
-			this.Controls.Add(PanelOver);
-			PanelOver.BringToFront();
+			PanelOver.Show();
+			//this.Controls.Add(PanelOver);
+			//PanelOver.BringToFront();
+
+			//PanelOver.BringToFront();
 			//PanelOver.Invalidate();
+			//Invalidate();
 		}
 
 		private void PanelPatches_MouseUp(object sender, MouseEventArgs e)
@@ -184,8 +309,9 @@ namespace patchwork
 			patches.PutOne(e.X, e.Y);
 			//this.PanelPatches.Invalidate();
 
-
-			this.Controls.Remove(PanelOver);
+			PanelOver.Hide();
+			Invalidate();
+			//this.Controls.Remove(PanelOver);
 			//PanelOver.BringToFront();
 			//PanelOver.Invalidate();
 		}
@@ -194,13 +320,38 @@ namespace patchwork
 		{
 			if (patches.IsPatchTaken()) {
 				patches.MoveOne(e.X, e.Y);
+				//if (PanelOver.BackColor == Color.Transparent)
+				//{
+				//	PanelOver.BackColor = Color.Blue;
+				//	PanelOver.BackColor = Color.Transparent;
+				//} else
+				//{
+				//	PanelOver.BackColor = Color.Transparent;
+				//}
 				//this.PanelPatches.Invalidate();
 
 				//this.Controls.Remove(PanelOver);
 				//this.Controls.Add(PanelOver);
 				//PanelOver.BringToFront();
-				PanelOver.Invalidate();
+				//PanelOver.Invalidate();
+
+				//if (PanelOver.Visible == true)
+				//{
+				//	PanelOver.Hide();
+				//} else
+				//{
+				//	PanelOver.Show();
+				//} 
+				//PanelOver.Hide();
+				//PanelOver.Show();
+				//this.Invalidate();
 				//Invalidate();
+				PanelOver.Invalidate();
+
+				//PanelOver.Invalidate();
+
+				//Invalidate();
+				//PanelOver.Invalidate();
 			}
 		}
 

@@ -352,8 +352,22 @@ namespace patchwork
 					mouse_position.Y - patch_height / 2,
 					square_length);
 
+				//e.Graphics.Flush();
+
+				//e.Graphics.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(700, 400));
 				//e.Graphics.Dispose();
-				e.Graphics.DrawImage(taken_patch_pole, 0, 0);
+				//e.Graphics.SetClip(patch_graphics);
+				//e.Graphics.ResetClip();
+				//try
+				//{
+					e.Graphics.DrawImage(taken_patch_pole,
+						0,
+						0);
+				//} catch (ArgumentException)
+				//{
+
+				//}
+				//e.Graphics.Dispose();
 			}
 		}
 
