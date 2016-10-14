@@ -345,13 +345,23 @@ namespace patchwork
 				Patch patch = patches[taken_patch_index];
 				int patch_width = patch.GetWidth() * square_length,
 					patch_height = patch.GetHeight() * square_length;
+
 				taken_patch_pole = new Bitmap(table_layout_panel_main.Width, table_layout_panel_main.Height);
 				Graphics patch_graphics = Graphics.FromImage(taken_patch_pole);
+
+				//Bitmap taken_patch_pole = new Bitmap(table_layout_panel_main.Width, 
+				//	table_layout_panel_main.Height, 
+				//	System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+				//taken_patch_pole.MakeTransparent();
+				//Graphics patch_graphics = Graphics.FromImage(taken_patch_pole);
+
+
 				patch.Paint(patch_graphics, new SolidBrush(Color.Red),
 					mouse_position.X - patch_width / 2,
 					mouse_position.Y - patch_height / 2,
 					square_length);
 
+				e.Graphics.Clear(Color.Lime);
 				//e.Graphics.Flush();
 
 				//e.Graphics.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(700, 400));

@@ -16,7 +16,7 @@ namespace patchwork
 		public ExtendedPanel()
 		{
 			SetStyle(ControlStyles.Opaque, true);
-			SetStyle(ControlStyles.UserPaint, true);
+			//SetStyle(ControlStyles.UserPaint, true);
 		}
 
 		//private int opacity = 50;
@@ -186,7 +186,7 @@ namespace patchwork
             InitializeComponent();
 			
 
-			PanelOver.BackColor = Color.Transparent;
+			PanelOver.BackColor = Color.Blue;
 			//PanelOver.Opacity = 50;
 			//PanelOver.TransparencyKey = Color.Blue;
 			//PanelOver.BackColor = Color.FromArgb(0, Color.Red);
@@ -297,7 +297,7 @@ namespace patchwork
 
 			PanelOver.Show();
 			//this.Controls.Add(PanelOver);
-			//PanelOver.BringToFront();
+			PanelOver.BringToFront();
 
 			//PanelOver.BringToFront();
 			//PanelOver.Invalidate();
