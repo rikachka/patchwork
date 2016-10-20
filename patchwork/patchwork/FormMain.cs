@@ -90,7 +90,8 @@ namespace patchwork
 
 		private void PanelPatches_MouseDown(object sender, MouseEventArgs e)
         {
-            Patch patch = patches.TakeOne(e.X, e.Y);
+			patches.PutOne();
+			Patch patch = patches.TakeOne(e.X, e.Y);
 			if (patches.IsPatchTaken())
 			{
 				player_boards[turn].AddNewPatch(patch);
@@ -129,22 +130,6 @@ namespace patchwork
 				player_panels[turn].Invalidate();
 				return;
 			}
-			//switch (e.KeyCode)
-			//{
-			//	case Keys.Down:
-			//		player_boards[turn].
-			//		break;
-			//	case Keys.Up:
-			//		break;
-			//	case Keys.Left:
-			//		break;
-			//	case Keys.Right:
-			//		break;
-			//}
-			//if (e.KeyCode == Keys.Down)
-			//{
-			//	MessageBox.Show("Key up");
-			//}
 		}
 	}
 }

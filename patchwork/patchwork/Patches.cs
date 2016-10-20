@@ -71,7 +71,7 @@ namespace patchwork
 
 		public void Reflect()
 		{
-			int[,] info_new = new int[GetWidth(), GetHeight()];
+			int[,] info_new = new int[GetHeight(), GetWidth()];
 			for (int i = 0; i < GetHeight(); i++)
 			{
 				for (int j = 0; j < GetWidth(); j++)
@@ -340,6 +340,11 @@ namespace patchwork
 				prev_squares_in_width += patch.GetWidth() + 1;
 			}
 			return GetTakenPatch();
+		}
+
+		public void PutOne()
+		{
+			taken_patch_index = NOT_TAKEN;
 		}
 
 		public bool IsPatchTaken()
