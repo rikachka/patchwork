@@ -14,7 +14,8 @@ namespace patchwork
 
 	public partial class FormMain : Form
     {
-        byte[,] Area = new byte[10, 21];
+		Brush[] COLR = { Brushes.Aqua, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Green, Brushes.Azure, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue, Brushes.PapayaWhip };
+		byte[,] Area = new byte[10, 21];
 
         PlayerBoard player_board;
         PlayerBoard opponent_board;
@@ -130,6 +131,12 @@ namespace patchwork
 				player_panels[turn].Invalidate();
 				return;
 			}
+		}
+
+		private void PanelPlayer_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			player_boards[turn].FixPatch(new Point(e.X, e.Y));
+			player_panels[turn].Invalidate();
 		}
 	}
 }

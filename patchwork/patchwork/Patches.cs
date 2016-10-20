@@ -8,12 +8,21 @@ using System.Drawing;
 
 namespace patchwork
 {
+	static class PatchBrushes
+	{
+		public static Brush NewPatchBrush = Brushes.Red;
+		public static Brush PatchFromPanelPatchesBrush = Brushes.Green;
+		public static Brush[] DifferentBrushes = { Brushes.Orange, Brushes.Blue, Brushes.Green, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue };
+	}
+
 	class Patch
 	{
 		public int[,] info;
 		int price;
 		int time;
 		int income;
+		Point position;
+		Brush brush;
 
 		public Patch(int[,] info_, int price_, int time_, int income_)
 		{
@@ -38,8 +47,12 @@ namespace patchwork
 			return info[i, j] == 1;
 		}
 
-		public void Paint(Graphics graphics, SolidBrush patch_brush, int margin_width, int margin_height, int square_length)
+		public void Paint(Graphics graphics, Brush patch_brush, int margin_width, int margin_height, int square_length)
 		{
+			if (patch_brush == null)
+			{
+				patch_brush = brush;
+			}
 			for (int i = 0; i < GetHeight(); i++)
 			{
 				for (int j = 0; j < GetWidth(); j++)
@@ -82,8 +95,19 @@ namespace patchwork
 			info = info_new;
 		}
 
-		public void Transpose()
+		public void SetPosition(Point position_)
 		{
+			position = position_;
+		}
+
+		public Point GetPosition()
+		{
+			return position;
+		}
+
+		public void SetBrush(Brush brush_)
+		{
+			brush = brush_;
 		}
 	}
 
@@ -161,6 +185,8 @@ namespace patchwork
 			for (int i = 0; i < patches.Length; i++)
 			{
 				Patch patch = patches[i];
+				Brush patch_brush = PatchBrushes.DifferentBrushes[random.Next(PatchBrushes.DifferentBrushes.Length)];
+				patch.SetBrush(patch_brush);
 				if (patch.GetWidth() == 1 && patch.GetHeight() == 2)
 				{
 					patches[i] = patches[0];
@@ -245,14 +271,15 @@ namespace patchwork
 				margin_squares = 1;
 			}
 
-			SolidBrush patch_brush;
+			Brush patch_brush;
 			if (taken_patch_index == patch_index)
 			{
-				patch_brush = new SolidBrush(Color.Red);
+				patch_brush = PatchBrushes.NewPatchBrush;
 			}
 			else
 			{
-				patch_brush = new SolidBrush(Color.Green);
+				//patch_brush = PatchBrushes.PatchFromPanelPatchesBrush;
+				patch_brush = null;
 			}
 
 			patch.Paint(graphics, patch_brush,

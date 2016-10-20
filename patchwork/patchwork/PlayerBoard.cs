@@ -28,7 +28,8 @@ namespace patchwork
 		bool has_new_patch = false;
 		bool is_patch_taken = false;
 		Patch new_patch;
-		Point new_patch_position;
+
+		List<Patch> patches = new List<Patch>();
 
 		public PlayerBoard(TableLayoutPanel panel_player_)
         {
@@ -75,32 +76,37 @@ namespace patchwork
             }
             e.Graphics.DrawImage(POLE, 0, 0);
 
+			foreach (Patch patch in patches)
+			{
+				PaintPatch(e, patch, null);
+			}
+
 			if (has_new_patch)
 			{
-				PaintPatch(e, new_patch);
+				PaintPatch(e, new_patch, PatchBrushes.NewPatchBrush);
 			}
         }
 
-		public void PaintPatch(PaintEventArgs e, Patch patch)
+		public void PaintPatch(PaintEventArgs e, Patch patch, Brush brush)
 		{
 			int patch_width = patch.GetWidth() * square_length,
 				patch_height = patch.GetHeight() * square_length;
 			Bitmap patch_pole = new Bitmap(patch_width, patch_height);
 			Graphics patch_graphics = Graphics.FromImage(patch_pole);
-			patch.Paint(patch_graphics, new SolidBrush(Color.Red),
+			patch.Paint(patch_graphics, brush,
 				0,
 				0,
 				square_length);
 			e.Graphics.DrawImage(patch_pole,
-				margin_width + new_patch_position.X * square_length,
-				margin_height + new_patch_position.Y * square_length);
+				margin_width + patch.GetPosition().X * square_length,
+				margin_height + patch.GetPosition().Y * square_length);
 		}
 
 		public void AddNewPatch(Patch patch)
 		{
 			new_patch = patch;
 			has_new_patch = true;
-			new_patch_position = CalculatePatchPositionByCentrePoint(new Point(0, 0));
+			new_patch.SetPosition(CalculatePatchPositionByCentrePoint(new Point(0, 0)));
 		}
 
 		public void DeleteNewPatch()
@@ -111,12 +117,9 @@ namespace patchwork
 
 		public void TakePatch(Point mouse_position)
 		{
-			if (has_new_patch)
+			if (IsClickOnNewPatch(mouse_position))
 			{
-				if (GetNewPatchRectangle().Contains(mouse_position))
-				{
-					is_patch_taken = true;
-				}
+				is_patch_taken = true;
 			}
 		}
 
@@ -124,7 +127,7 @@ namespace patchwork
 		{
 			if (IsPatchTaken())
 			{
-				new_patch_position = CalculatePatchPositionByCentrePoint(mouse_position);
+				new_patch.SetPosition(CalculatePatchPositionByCentrePoint(mouse_position));
 			}
 		}
 
@@ -157,7 +160,16 @@ namespace patchwork
 						MessageBox.Show("ERROR! Can't transpose patch by this key.");
 						break;
 				}
-				new_patch_position = CheckPatchInBoard(new_patch_position);
+				new_patch.SetPosition(CheckPatchInBoard(new_patch.GetPosition()));
+			}
+		}
+
+		public void FixPatch(Point mouse_position)
+		{
+			if (IsClickOnNewPatch(mouse_position))
+			{
+				patches.Add(new_patch);
+				has_new_patch = false;
 			}
 		}
 
@@ -166,8 +178,8 @@ namespace patchwork
 			int patch_width = new_patch.GetWidth() * square_length,
 				patch_height = new_patch.GetHeight() * square_length;
 			return new Rectangle(
-				margin_width + new_patch_position.X * square_length,
-				margin_height + new_patch_position.Y * square_length,
+				margin_width + new_patch.GetPosition().X * square_length,
+				margin_height + new_patch.GetPosition().Y * square_length,
 				patch_width,
 				patch_height
 			);
@@ -196,6 +208,11 @@ namespace patchwork
 		public bool IsPatchTaken()
 		{
 			return has_new_patch && is_patch_taken;
+		}
+
+		public bool IsClickOnNewPatch(Point mouse_position)
+		{
+			return has_new_patch && GetNewPatchRectangle().Contains(mouse_position);
 		}
     }
 }
