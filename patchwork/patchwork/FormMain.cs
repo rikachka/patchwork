@@ -135,8 +135,13 @@ namespace patchwork
 
 		private void PanelPlayer_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			player_boards[turn].FixPatch(new Point(e.X, e.Y));
-			player_panels[turn].Invalidate();
+			if (player_boards[turn].IsClickOnNewPatch(new Point(e.X, e.Y)))
+			{
+				player_boards[turn].FixPatch(new Point(e.X, e.Y));
+				patches.MarkTakenPatch();
+				player_panels[turn].Invalidate();
+				this.PanelPatches.Invalidate();
+			}
 		}
 	}
 }

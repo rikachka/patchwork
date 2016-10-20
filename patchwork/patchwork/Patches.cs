@@ -23,6 +23,7 @@ namespace patchwork
 		int income;
 		Point position;
 		Brush brush;
+		bool taken;
 
 		public Patch(int[,] info_, int price_, int time_, int income_)
 		{
@@ -30,6 +31,7 @@ namespace patchwork
 			price = price_;
 			time = time_;
 			income = income_;
+			taken = false;
 		}
 
 		public int GetHeight()
@@ -108,6 +110,16 @@ namespace patchwork
 		public void SetBrush(Brush brush_)
 		{
 			brush = brush_;
+		}
+
+		public void MarkTaken()
+		{
+			taken = true;
+		}
+
+		public bool IsTaken()
+		{
+			return taken;
 		}
 	}
 
@@ -255,9 +267,11 @@ namespace patchwork
 					break;
 				}
 
-				PaintPatchInField(patch_index, prev_squares_in_width);
-
-				prev_squares_in_width += patch.GetWidth() + 1;
+				if (!patch.IsTaken())
+				{
+					PaintPatchInField(patch_index, prev_squares_in_width);
+					prev_squares_in_width += patch.GetWidth() + 1;
+				}
 			}
 		}
 
@@ -389,6 +403,12 @@ namespace patchwork
 			{
 				return null;
 			}
+		}
+
+		public void MarkTakenPatch()
+		{
+			patches[taken_patch_index].MarkTaken();
+			taken_patch_index = NOT_TAKEN;
 		}
 	}
 }

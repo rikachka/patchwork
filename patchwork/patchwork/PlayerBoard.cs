@@ -166,11 +166,8 @@ namespace patchwork
 
 		public void FixPatch(Point mouse_position)
 		{
-			if (IsClickOnNewPatch(mouse_position))
-			{
-				patches.Add(new_patch);
-				has_new_patch = false;
-			}
+			patches.Add(new_patch);
+			has_new_patch = false;
 		}
 
 		public Rectangle GetNewPatchRectangle()
