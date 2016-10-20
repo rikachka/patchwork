@@ -176,7 +176,6 @@
 			this.TableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
 			this.TableLayoutPanelMain.Size = new System.Drawing.Size(684, 362);
 			this.TableLayoutPanelMain.TabIndex = 3;
-			this.TableLayoutPanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.TableLayoutPanelMain_Paint);
 			// 
 			// PanelPatches
 			// 
@@ -192,8 +191,6 @@
 			this.PanelPatches.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPatches_Paint);
 			this.PanelPatches.Layout += new System.Windows.Forms.LayoutEventHandler(this.PanelPatches_Layout);
 			this.PanelPatches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelPatches_MouseDown);
-			this.PanelPatches.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PanelPatches_MouseMove);
-			this.PanelPatches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PanelPatches_MouseUp);
 			// 
 			// TableLayoutPanelPlayer
 			// 

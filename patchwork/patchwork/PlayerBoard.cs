@@ -93,9 +93,6 @@ namespace patchwork
 				0,
 				0,
 				square_length);
-			//e.Graphics.DrawImage(patch_pole,
-			//	new_patch_centre_position.X - patch_width / 2,
-			//	new_patch_centre_position.Y - patch_height / 2);
 			e.Graphics.DrawImage(patch_pole,
 				margin_width + new_patch_position.X * square_length,
 				margin_height + new_patch_position.Y * square_length);

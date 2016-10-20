@@ -102,22 +102,6 @@ namespace patchwork
 			player_panels[turn].Invalidate();
 		}
 
-		private void PanelPatches_MouseUp(object sender, MouseEventArgs e)
-		{
-			//patches.PutOne(e.X, e.Y);
-		}
-
-		private void PanelPatches_MouseMove(object sender, MouseEventArgs e)
-		{
-			//if (patches.IsPatchTaken()) {
-			//	patches.MoveOne(e.X, e.Y);
-			//}
-		}
-
-		private void TableLayoutPanelMain_Paint(object sender, PaintEventArgs e)
-		{
-		}
-
 		private void PanelPlayer_MouseDown(object sender, MouseEventArgs e)
 		{
 			player_boards[turn].TakePatch(new Point(e.X, e.Y));
