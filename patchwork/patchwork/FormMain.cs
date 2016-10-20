@@ -14,7 +14,6 @@ namespace patchwork
 
 	public partial class FormMain : Form
     {
-		Brush[] COLR = { Brushes.Aqua, Brushes.Orange, Brushes.Blue, Brushes.Red, Brushes.Green, Brushes.Azure, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue, Brushes.PapayaWhip };
 		byte[,] Area = new byte[10, 21];
 
         PlayerBoard player_board;

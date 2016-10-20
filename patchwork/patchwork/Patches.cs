@@ -12,7 +12,7 @@ namespace patchwork
 	{
 		public static Brush NewPatchBrush = Brushes.Red;
 		public static Brush PatchFromPanelPatchesBrush = Brushes.Green;
-		public static Brush[] DifferentBrushes = { Brushes.Orange, Brushes.Blue, Brushes.Green, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue };
+		public static Brush[] DifferentBrushes = { Brushes.Orange, Brushes.Blue, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue };
 	}
 
 	class Patch
@@ -370,15 +370,18 @@ namespace patchwork
 			for (int patch_index = 0; patch_index < patches.Length; patch_index++)
 			{
 				Patch patch = patches[patch_index];
-				if (margin_width + prev_squares_in_width * square_length < x && 
-					x < margin_width + (prev_squares_in_width + patch.GetWidth()) * square_length)
+				if (!patch.IsTaken())
 				{
-					taken_patch_index = patch_index;
-					mouse_position = new Point(x, y);
-					//PaintPatchInField(patch_index);
-					break;
+					if (margin_width + prev_squares_in_width * square_length < x &&
+						x < margin_width + (prev_squares_in_width + patch.GetWidth()) * square_length)
+					{
+						taken_patch_index = patch_index;
+						mouse_position = new Point(x, y);
+						//PaintPatchInField(patch_index);
+						break;
+					}
+					prev_squares_in_width += patch.GetWidth() + 1;
 				}
-				prev_squares_in_width += patch.GetWidth() + 1;
 			}
 			return GetTakenPatch();
 		}
