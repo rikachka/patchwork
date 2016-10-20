@@ -330,6 +330,7 @@
 			this.TransparencyKey = System.Drawing.Color.Lime;
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormMain_Paint);
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyUp);
 			this.MenuMain.ResumeLayout(false);
 			this.MenuMain.PerformLayout();
 			this.TableLayoutPanelMain.ResumeLayout(false);

@@ -120,5 +120,31 @@ namespace patchwork
 		{
 			player_boards[turn].PutPatch();
 		}
+
+		private void FormMain_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up || e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+			{
+				player_boards[turn].TransposePatch(e.KeyCode);
+				player_panels[turn].Invalidate();
+				return;
+			}
+			//switch (e.KeyCode)
+			//{
+			//	case Keys.Down:
+			//		player_boards[turn].
+			//		break;
+			//	case Keys.Up:
+			//		break;
+			//	case Keys.Left:
+			//		break;
+			//	case Keys.Right:
+			//		break;
+			//}
+			//if (e.KeyCode == Keys.Down)
+			//{
+			//	MessageBox.Show("Key up");
+			//}
+		}
 	}
 }

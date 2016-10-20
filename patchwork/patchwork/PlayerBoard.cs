@@ -24,12 +24,11 @@ namespace patchwork
 			board_length,
 			square_length,
 			margin_width, margin_height;
-
-		Point new_patch_centre_position;
-		Point new_patch_position;
+		
 		bool has_new_patch = false;
 		bool is_patch_taken = false;
 		Patch new_patch;
+		Point new_patch_position;
 
 		public PlayerBoard(TableLayoutPanel panel_player_)
         {
@@ -38,7 +37,6 @@ namespace patchwork
             panel_points = (Panel)panel_player.GetControlFromPosition(0, 1);
             panel_prize = (Panel)panel_player.GetControlFromPosition(1, 1);
             panel_income = (Panel)panel_player.GetControlFromPosition(2, 1);
-            //panel_info = panel_info_;
         }
 
 		void CountDrawingInfo()
@@ -135,6 +133,34 @@ namespace patchwork
 			is_patch_taken = false;
 		}
 
+		public void TransposePatch(Keys key)
+		{
+			if (has_new_patch)
+			{
+				switch (key)
+				{
+					case Keys.Down:
+						new_patch.Reflect();
+						break;
+					case Keys.Up:
+						new_patch.Reflect();
+						break;
+					case Keys.Right:
+						new_patch.RotateRight();
+						break;
+					case Keys.Left:
+						new_patch.RotateRight();
+						new_patch.RotateRight();
+						new_patch.RotateRight();
+						break;
+					default:
+						MessageBox.Show("ERROR! Can't transpose patch by this key.");
+						break;
+				}
+				new_patch_position = CheckPatchInBoard(new_patch_position);
+			}
+		}
+
 		public Rectangle GetNewPatchRectangle()
 		{
 			int patch_width = new_patch.GetWidth() * square_length,
@@ -156,10 +182,15 @@ namespace patchwork
 			Point topleft_square = new Point(
 				(point_topleft_square_centre.X - margin_width) / square_length,
 				(point_topleft_square_centre.Y - margin_height) / square_length);
-			topleft_square = new Point(
-				Math.Min(Math.Max(topleft_square.X, 0), squares_number - new_patch.GetWidth()),
-				Math.Min(Math.Max(topleft_square.Y, 0), squares_number - new_patch.GetHeight()));
+			topleft_square = CheckPatchInBoard(topleft_square);
 			return topleft_square;
+		}
+
+		public Point CheckPatchInBoard(Point patch_position)
+		{
+			return new Point(
+				Math.Min(Math.Max(patch_position.X, 0), squares_number - new_patch.GetWidth()),
+				Math.Min(Math.Max(patch_position.Y, 0), squares_number - new_patch.GetHeight()));
 		}
 
 		public bool IsPatchTaken()

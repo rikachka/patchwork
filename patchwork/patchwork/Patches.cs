@@ -55,6 +55,36 @@ namespace patchwork
 				}
 			}
 		}
+
+		public void RotateRight()
+		{
+			int[,] info_new = new int[GetWidth(), GetHeight()];
+			for (int i = 0; i < GetWidth(); i++)
+			{
+				for (int j = 0; j < GetHeight(); j++)
+				{
+					info_new[i, j] = info[GetHeight() - 1 - j, i];
+				}
+			}
+			info = info_new;
+		}
+
+		public void Reflect()
+		{
+			int[,] info_new = new int[GetWidth(), GetHeight()];
+			for (int i = 0; i < GetHeight(); i++)
+			{
+				for (int j = 0; j < GetWidth(); j++)
+				{
+					info_new[i, j] = info[GetHeight() - 1 - i, j];
+				}
+			}
+			info = info_new;
+		}
+
+		public void Transpose()
+		{
+		}
 	}
 
 	class Patches
