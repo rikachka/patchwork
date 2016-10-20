@@ -297,7 +297,7 @@ namespace patchwork
 		}
 
 
-		public void TakeOne(int x, int y)
+		public Patch TakeOne(int x, int y)
 		{
 			int prev_squares_in_width = 0;
 			for (int patch_index = 0; patch_index < patches.Length; patch_index++)
@@ -313,6 +313,7 @@ namespace patchwork
 				}
 				prev_squares_in_width += patch.GetWidth() + 1;
 			}
+			return GetTakenPatch();
 		}
 
 		public void PutOne(int x, int y)
@@ -327,63 +328,54 @@ namespace patchwork
 
 		public void PaintTakenPatch(PaintEventArgs e)
 		{
-			//Patch patch = patches[taken_patch_index];
-			//int patch_width = patch.GetWidth() * square_length,
-			//	patch_height = patch.GetHeight() * square_length;
-			//taken_patch_pole = new Bitmap(patch_width, patch_height);
-			//Graphics patch_graphics = Graphics.FromImage(taken_patch_pole);
-			//patch.Paint(patch_graphics, new SolidBrush(Color.Red),
-			//	0,
-			//	0,
-			//	square_length);
-			//e.Graphics.DrawImage(taken_patch_pole, 
-			//	mouse_position.X - patch_width / 2, 
-			//	mouse_position.Y - patch_height / 2);
+			Patch patch = patches[taken_patch_index];
+			int patch_width = patch.GetWidth() * square_length,
+				patch_height = patch.GetHeight() * square_length;
+			taken_patch_pole = new Bitmap(patch_width, patch_height);
+			Graphics patch_graphics = Graphics.FromImage(taken_patch_pole);
+			patch.Paint(patch_graphics, new SolidBrush(Color.Red),
+				0,
+				0,
+				square_length);
+			e.Graphics.DrawImage(taken_patch_pole,
+				mouse_position.X - patch_width / 2,
+				mouse_position.Y - patch_height / 2);
 
-			if (taken_patch_index != NOT_TAKEN)
-			{
-				Patch patch = patches[taken_patch_index];
-				int patch_width = patch.GetWidth() * square_length,
-					patch_height = patch.GetHeight() * square_length;
+			//if (taken_patch_index != NOT_TAKEN)
+			//{
+			//	Patch patch = patches[taken_patch_index];
+			//	int patch_width = patch.GetWidth() * square_length,
+			//		patch_height = patch.GetHeight() * square_length;
 
-				taken_patch_pole = new Bitmap(table_layout_panel_main.Width, table_layout_panel_main.Height);
-				Graphics patch_graphics = Graphics.FromImage(taken_patch_pole);
+			//	taken_patch_pole = new Bitmap(table_layout_panel_main.Width, table_layout_panel_main.Height);
+			//	Graphics patch_graphics = Graphics.FromImage(taken_patch_pole);
 
-				//Bitmap taken_patch_pole = new Bitmap(table_layout_panel_main.Width, 
-				//	table_layout_panel_main.Height, 
-				//	System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-				//taken_patch_pole.MakeTransparent();
-				//Graphics patch_graphics = Graphics.FromImage(taken_patch_pole);
-
-
-				patch.Paint(patch_graphics, new SolidBrush(Color.Red),
-					mouse_position.X - patch_width / 2,
-					mouse_position.Y - patch_height / 2,
-					square_length);
-
-				e.Graphics.Clear(Color.Lime);
-				//e.Graphics.Flush();
-
-				//e.Graphics.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(700, 400));
-				//e.Graphics.Dispose();
-				//e.Graphics.SetClip(patch_graphics);
-				//e.Graphics.ResetClip();
-				//try
-				//{
-					e.Graphics.DrawImage(taken_patch_pole,
-						0,
-						0);
-				//} catch (ArgumentException)
-				//{
-
-				//}
-				//e.Graphics.Dispose();
-			}
+			//	patch.Paint(patch_graphics, new SolidBrush(Color.Red),
+			//		mouse_position.X - patch_width / 2,
+			//		mouse_position.Y - patch_height / 2,
+			//		square_length);
+				
+			//	e.Graphics.DrawImage(taken_patch_pole,
+			//		0,
+			//		0);
+			//}
 		}
 
 		public bool IsPatchTaken()
 		{
 			return taken_patch_index != NOT_TAKEN;
+		}
+
+		public Patch GetTakenPatch()
+		{
+			if (IsPatchTaken())
+			{
+				return patches[taken_patch_index];
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 }
