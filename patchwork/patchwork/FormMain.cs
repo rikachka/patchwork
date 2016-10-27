@@ -107,21 +107,30 @@ namespace patchwork
 
 		private void PanelPlayer_MouseDown(object sender, MouseEventArgs e)
 		{
-			player_boards[turn].TakePatch(new Point(e.X, e.Y));
+			if ((sender as Panel) == player_panels[turn])
+			{
+				player_boards[turn].TakePatch(new Point(e.X, e.Y));
+			}
 		}
 
 		private void PanelPlayer_MouseMove(object sender, MouseEventArgs e)
 		{
-			if (player_boards[turn].IsPatchTaken())
+			if ((sender as Panel) == player_panels[turn])
 			{
-				player_boards[turn].MovePatch(new Point(e.X, e.Y));
-				player_panels[turn].Invalidate();
+				if (player_boards[turn].IsPatchTaken())
+				{
+					player_boards[turn].MovePatch(new Point(e.X, e.Y));
+					player_panels[turn].Invalidate();
+				}
 			}
 		}
 
 		private void PanelPlayer_MouseUp(object sender, MouseEventArgs e)
 		{
-			player_boards[turn].PutPatch();
+			if ((sender as Panel) == player_panels[turn])
+			{
+				player_boards[turn].PutPatch();
+			}
 		}
 
 		private void FormMain_KeyUp(object sender, KeyEventArgs e)
@@ -136,6 +145,53 @@ namespace patchwork
 
 		private void PanelPlayer_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
+			if ((sender as Panel) == player_panels[turn])
+			{
+				if (player_boards[turn].IsClickOnNewPatch(new Point(e.X, e.Y)))
+				{
+					if (player_boards[turn].FixPatch(new Point(e.X, e.Y)))
+					{
+						patches.MarkTakenPatch();
+						player_panels[turn].Invalidate();
+						this.PanelPatches.Invalidate();
+						GiveTurnToNextPlayer();
+					}
+				}
+			}
+		}
+
+		private void GiveTurnToNextPlayer()
+		{
+			if (turn == Turn.PLAYER)
+			{
+				turn = Turn.OPPONENT;
+			} 
+			else
+			{
+				turn = Turn.PLAYER;
+			}
+		}
+
+		private void PanelPlayerMouseDown(MouseEventArgs e)
+		{
+			player_boards[turn].TakePatch(new Point(e.X, e.Y));
+		}
+
+		private void PanelPlayerMouseMove(MouseEventArgs e)
+		{
+			if (player_boards[turn].IsPatchTaken())
+			{
+				player_boards[turn].MovePatch(new Point(e.X, e.Y));
+				player_panels[turn].Invalidate();
+			}
+		}
+
+		private void PanelPlayerMouseUp()
+		{
+			player_boards[turn].PutPatch();
+		}
+
+		private void PanelPlayerMouseDoubleClick(MouseEventArgs e) {
 			if (player_boards[turn].IsClickOnNewPatch(new Point(e.X, e.Y)))
 			{
 				if (player_boards[turn].FixPatch(new Point(e.X, e.Y)))
@@ -143,8 +199,29 @@ namespace patchwork
 					patches.MarkTakenPatch();
 					player_panels[turn].Invalidate();
 					this.PanelPatches.Invalidate();
+					GiveTurnToNextPlayer();
 				}
 			}
+		}
+
+		private void PanelOpponent_MouseDown(object sender, MouseEventArgs e)
+		{
+
+		}
+
+		private void PanelOpponent_MouseMove(object sender, MouseEventArgs e)
+		{
+
+		}
+
+		private void PanelOpponent_MouseUp(object sender, MouseEventArgs e)
+		{
+
+		}
+
+		private void PanelOpponent_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+
 		}
 	}
 }

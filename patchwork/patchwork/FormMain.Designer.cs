@@ -146,6 +146,10 @@
 			this.PanelOpponent.TabIndex = 2;
 			this.PanelOpponent.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponent_Paint);
 			this.PanelOpponent.Layout += new System.Windows.Forms.LayoutEventHandler(this.PanelOpponent_Layout);
+			this.PanelOpponent.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PanelPlayer_MouseDoubleClick);
+			this.PanelOpponent.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelPlayer_MouseDown);
+			this.PanelOpponent.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PanelPlayer_MouseMove);
+			this.PanelOpponent.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PanelPlayer_MouseUp);
 			// 
 			// PanelBoard
 			// 
