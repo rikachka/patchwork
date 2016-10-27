@@ -55,6 +55,16 @@ namespace patchwork
             this.PanelPatches.Invalidate();
 		}
 
+		private void FormMain_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up || e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
+			{
+				player_boards[turn].TransposePatch(e.KeyCode);
+				player_panels[turn].Invalidate();
+				return;
+			}
+		}
+
 		private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
         {
         }
@@ -133,16 +143,6 @@ namespace patchwork
 			}
 		}
 
-		private void FormMain_KeyUp(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up || e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
-			{
-				player_boards[turn].TransposePatch(e.KeyCode);
-				player_panels[turn].Invalidate();
-				return;
-			}
-		}
-
 		private void PanelPlayer_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			if ((sender as Panel) == player_panels[turn])
@@ -152,6 +152,7 @@ namespace patchwork
 					if (player_boards[turn].FixPatch(new Point(e.X, e.Y)))
 					{
 						patches.MarkTakenPatch();
+						player_boards[turn].PutPatch();
 						player_panels[turn].Invalidate();
 						this.PanelPatches.Invalidate();
 						GiveTurnToNextPlayer();
