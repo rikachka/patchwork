@@ -12,7 +12,10 @@ namespace patchwork
 	{
 		public static Brush NewPatchBrush = Brushes.Red;
 		public static Brush PatchFromPanelPatchesBrush = Brushes.Green;
-		public static Brush[] DifferentBrushes = { Brushes.Orange, Brushes.Blue, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue };
+		public static Brush[] DifferentBrushes = { Brushes.Orange, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue };
+		public static Brush PatchPriceBrush = Brushes.Black;
+		public static Brush PatchTimeBrush = Brushes.Brown;
+		public static Brush PatchIncomeBrush = Brushes.Blue;
 	}
 
 	class Patches
@@ -120,7 +123,6 @@ namespace patchwork
 			PaintField(squares_number_width, squares_number_height, square_length,
 				margin_width, margin_height, board_width, board_height);
 			PaintPatches();
-
 			e.Graphics.DrawImage(POLE, 0, 0);
 
 			//PaintTakenPatch(e);

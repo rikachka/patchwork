@@ -66,6 +66,7 @@ namespace patchwork
 			{
 				PaintBorder(graphics, patch_brush, margin_width, margin_height, square_length);
 			}
+			PaintPrice(graphics, patch_brush, margin_width, margin_height, square_length);
 		}
 
 		public void PaintBorder(Graphics graphics, Brush patch_brush, int margin_width, int margin_height, int square_length)
@@ -88,6 +89,45 @@ namespace patchwork
 							new Point(margin_width + j * square_length, margin_height + i * square_length)
 						};
 						graphics.DrawLines(new Pen(Color.Red, 3), points );
+					}
+				}
+			}
+		}
+
+		public void PaintPrice(Graphics graphics, Brush patch_brush, int margin_width, int margin_height, int square_length)
+		{
+			int painted = 0;
+			for (int i = 0; i < GetHeight(); i++)
+			{
+				for (int j = 0; j < GetWidth(); j++)
+				{
+					if (IsSquarePartOfPatch(i, j))
+					{
+						if (painted == 0) {
+							graphics.DrawString(price.ToString(),
+								new Font("Arial", 10),
+								PatchBrushes.PatchPriceBrush,
+								new Point(margin_width + j * square_length, margin_height + i * square_length));
+						}
+						if (painted == 1)
+						{
+							graphics.DrawString(time.ToString(),
+								new Font("Arial", 10),
+								PatchBrushes.PatchTimeBrush,
+								new Point(margin_width + j * square_length, margin_height + i * square_length));
+						}
+						if (painted == 2)
+						{
+							graphics.DrawString(income.ToString(),
+								new Font("Arial", 10),
+								PatchBrushes.PatchIncomeBrush,
+								new Point(margin_width + j * square_length, margin_height + i * square_length));
+						}
+						painted++;
+						if (painted == 3) // price, time and income
+						{
+							return;
+						}
 					}
 				}
 			}
