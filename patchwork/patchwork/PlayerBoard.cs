@@ -173,10 +173,56 @@ namespace patchwork
 			}
 		}
 
-		public void FixPatch(Point mouse_position)
+		public bool IsPatchesIntersection()
 		{
-			patches.Add(new_patch);
-			has_new_patch = false;
+			bool[,] occupied_squares = new bool[squares_number, squares_number];
+			for (int i = 0; i < occupied_squares.GetLength(0); i++)
+			{
+				for (int j = 0; j < occupied_squares.GetLength(1); j++)
+				{
+					occupied_squares[i, j] = false;
+				}
+			}
+			foreach (Patch patch in patches)
+			{
+				for (int i = 0; i < patch.GetHeight(); i++)
+				{
+					for (int j = 0; j < patch.GetWidth(); j++)
+					{
+						if (patch.IsSquarePartOfPatch(i, j))
+						{
+							Point point = new Point(patch.GetPosition().X + j, patch.GetPosition().Y + i);
+							occupied_squares[point.X, point.Y] = true;
+						}
+					}
+				}
+			}
+			for (int i = 0; i < new_patch.GetHeight(); i++)
+			{
+				for (int j = 0; j < new_patch.GetWidth(); j++)
+				{
+					if (new_patch.IsSquarePartOfPatch(i, j))
+					{
+						Point point = new Point(new_patch.GetPosition().X + j, new_patch.GetPosition().Y + i);
+						if (occupied_squares[point.X, point.Y])
+						{
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+
+		public bool FixPatch(Point mouse_position)
+		{
+			if (!IsPatchesIntersection())
+			{
+				patches.Add(new_patch);
+				has_new_patch = false;
+				return true;
+			}
+			return false;
 		}
 
 		public Rectangle GetNewPatchRectangle()

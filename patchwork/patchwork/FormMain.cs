@@ -136,10 +136,12 @@ namespace patchwork
 		{
 			if (player_boards[turn].IsClickOnNewPatch(new Point(e.X, e.Y)))
 			{
-				player_boards[turn].FixPatch(new Point(e.X, e.Y));
-				patches.MarkTakenPatch();
-				player_panels[turn].Invalidate();
-				this.PanelPatches.Invalidate();
+				if (player_boards[turn].FixPatch(new Point(e.X, e.Y)))
+				{
+					patches.MarkTakenPatch();
+					player_panels[turn].Invalidate();
+					this.PanelPatches.Invalidate();
+				}
 			}
 		}
 	}
