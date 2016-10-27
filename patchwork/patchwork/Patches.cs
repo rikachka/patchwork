@@ -15,114 +15,6 @@ namespace patchwork
 		public static Brush[] DifferentBrushes = { Brushes.Orange, Brushes.Blue, Brushes.Violet, Brushes.Tomato, Brushes.SteelBlue };
 	}
 
-	class Patch
-	{
-		public int[,] info;
-		int price;
-		int time;
-		int income;
-		Point position;
-		Brush brush;
-		bool taken;
-
-		public Patch(int[,] info_, int price_, int time_, int income_)
-		{
-			info = info_;
-			price = price_;
-			time = time_;
-			income = income_;
-			taken = false;
-		}
-
-		public int GetHeight()
-		{
-			return info.GetLength(0);
-		}
-
-		public int GetWidth()
-		{
-			return info.GetLength(1);
-		}
-
-		public bool IsSquarePartOfPatch(int i, int j)
-		{
-			return info[i, j] == 1;
-		}
-
-		public void Paint(Graphics graphics, Brush patch_brush, int margin_width, int margin_height, int square_length)
-		{
-			if (patch_brush == null)
-			{
-				patch_brush = brush;
-			}
-			for (int i = 0; i < GetHeight(); i++)
-			{
-				for (int j = 0; j < GetWidth(); j++)
-				{
-					if (IsSquarePartOfPatch(i, j))
-					{
-						graphics.FillRectangle(patch_brush,
-							margin_width + j * square_length,
-							margin_height + i * square_length,
-							square_length,
-							square_length);
-					}
-				}
-			}
-		}
-
-		public void RotateRight()
-		{
-			int[,] info_new = new int[GetWidth(), GetHeight()];
-			for (int i = 0; i < GetWidth(); i++)
-			{
-				for (int j = 0; j < GetHeight(); j++)
-				{
-					info_new[i, j] = info[GetHeight() - 1 - j, i];
-				}
-			}
-			info = info_new;
-		}
-
-		public void Reflect()
-		{
-			int[,] info_new = new int[GetHeight(), GetWidth()];
-			for (int i = 0; i < GetHeight(); i++)
-			{
-				for (int j = 0; j < GetWidth(); j++)
-				{
-					info_new[i, j] = info[GetHeight() - 1 - i, j];
-				}
-			}
-			info = info_new;
-		}
-
-		public void SetPosition(Point position_)
-		{
-			position = position_;
-		}
-
-		public Point GetPosition()
-		{
-			return position;
-		}
-
-		public void SetBrush(Brush brush_)
-		{
-			brush = brush_;
-		}
-
-		public void MarkTaken()
-		{
-			taken = true;
-		}
-
-		public bool IsTaken()
-		{
-			return taken;
-		}
-	}
-
 	class Patches
 	{
 		const int NOT_TAKEN = -1;
@@ -285,21 +177,19 @@ namespace patchwork
 				margin_squares = 1;
 			}
 
-			Brush patch_brush;
+			Brush patch_brush = null;
+			bool border = false;
 			if (taken_patch_index == patch_index)
 			{
-				patch_brush = PatchBrushes.NewPatchBrush;
-			}
-			else
-			{
-				//patch_brush = PatchBrushes.PatchFromPanelPatchesBrush;
-				patch_brush = null;
+				//patch_brush = PatchBrushes.NewPatchBrush;
+				border = true;
 			}
 
 			patch.Paint(graphics, patch_brush,
 				margin_width + prev_squares_in_width * square_length,
 				margin_height + margin_squares * square_length,
-				square_length);
+				square_length, 
+				border);
 		}
 
 		void PaintPatchInField(int patch_index)

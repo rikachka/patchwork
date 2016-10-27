@@ -83,20 +83,29 @@ namespace patchwork
 
 			if (has_new_patch)
 			{
-				PaintPatch(e, new_patch, PatchBrushes.NewPatchBrush);
+				PaintPatch(e, new_patch, PatchBrushes.NewPatchBrush, true);
 			}
         }
 
-		public void PaintPatch(PaintEventArgs e, Patch patch, Brush brush)
+		public void PaintPatch(PaintEventArgs e, Patch patch, Brush brush, bool border = false)
 		{
 			int patch_width = patch.GetWidth() * square_length,
 				patch_height = patch.GetHeight() * square_length;
 			Bitmap patch_pole = new Bitmap(patch_width, patch_height);
 			Graphics patch_graphics = Graphics.FromImage(patch_pole);
-			patch.Paint(patch_graphics, brush,
+			if (border)
+			{
+				patch.PaintBorder(patch_graphics, brush,
 				0,
 				0,
 				square_length);
+			} else
+			{
+				patch.Paint(patch_graphics, brush,
+				0,
+				0,
+				square_length);
+			}
 			e.Graphics.DrawImage(patch_pole,
 				margin_width + patch.GetPosition().X * square_length,
 				margin_height + patch.GetPosition().Y * square_length);
