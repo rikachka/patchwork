@@ -35,6 +35,12 @@ namespace patchwork
 			player_panels[Turn.PLAYER] = this.PanelPlayer;
 			player_panels[Turn.OPPONENT] = this.PanelOpponent;
 			turn = Turn.PLAYER;
+
+			player_board = new PlayerBoard(this.TableLayoutPanelPlayer);
+			player_boards[Turn.PLAYER] = player_board;
+
+			opponent_board = new PlayerBoard(this.TableLayoutPanelOpponent);
+			player_boards[Turn.OPPONENT] = opponent_board;
 		}
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -51,8 +57,6 @@ namespace patchwork
 
 		private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
         {
-            player_board = new PlayerBoard(this.TableLayoutPanelPlayer);
-			player_boards[Turn.PLAYER] = player_board;
         }
 
         private void PanelPlayer_Paint(object sender, PaintEventArgs e)
@@ -62,8 +66,6 @@ namespace patchwork
 
         private void PanelOpponent_Layout(object sender, LayoutEventArgs e)
         {
-            opponent_board = new PlayerBoard(this.TableLayoutPanelOpponent);
-			player_boards[Turn.OPPONENT] = opponent_board;
 		}
 
         private void PanelOpponent_Paint(object sender, PaintEventArgs e)
