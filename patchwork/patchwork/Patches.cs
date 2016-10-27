@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace patchwork
 {
-	static class PatchBrushes
+	static class Constants
 	{
 		public static Brush NewPatchBrush = Brushes.Red;
 		public static Brush PatchFromPanelPatchesBrush = Brushes.Green;
@@ -16,6 +16,7 @@ namespace patchwork
 		public static Brush PatchPriceBrush = Brushes.Black;
 		public static Brush PatchTimeBrush = Brushes.Brown;
 		public static Brush PatchIncomeBrush = Brushes.Blue;
+		public static string PatchFont = "Arial";
 	}
 
 	class Patches
@@ -92,7 +93,7 @@ namespace patchwork
 			for (int i = 0; i < patches.Length; i++)
 			{
 				Patch patch = patches[i];
-				Brush patch_brush = PatchBrushes.DifferentBrushes[random.Next(PatchBrushes.DifferentBrushes.Length)];
+				Brush patch_brush = Constants.DifferentBrushes[random.Next(Constants.DifferentBrushes.Length)];
 				patch.SetBrush(patch_brush);
 				if (patch.GetWidth() == 1 && patch.GetHeight() == 2)
 				{

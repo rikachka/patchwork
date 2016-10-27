@@ -104,24 +104,33 @@ namespace patchwork
 					if (IsSquarePartOfPatch(i, j))
 					{
 						if (painted == 0) {
-							graphics.DrawString(price.ToString(),
-								new Font("Arial", 10),
-								PatchBrushes.PatchPriceBrush,
-								new Point(margin_width + j * square_length, margin_height + i * square_length));
+							if (price > 0)
+							{
+								graphics.DrawString(price.ToString(),
+									new Font(Constants.PatchFont, square_length * 6 / 11),
+									Constants.PatchPriceBrush,
+									new Point(margin_width + j * square_length, margin_height + i * square_length));
+							}
 						}
 						if (painted == 1)
 						{
-							graphics.DrawString(time.ToString(),
-								new Font("Arial", 10),
-								PatchBrushes.PatchTimeBrush,
-								new Point(margin_width + j * square_length, margin_height + i * square_length));
+							if (time > 0)
+							{
+								graphics.DrawString(time.ToString(),
+									new Font(Constants.PatchFont, square_length * 6 / 11),
+									Constants.PatchTimeBrush,
+									new Point(margin_width + j * square_length, margin_height + i * square_length));
+							}
 						}
 						if (painted == 2)
 						{
-							graphics.DrawString(income.ToString(),
-								new Font("Arial", 10),
-								PatchBrushes.PatchIncomeBrush,
-								new Point(margin_width + j * square_length, margin_height + i * square_length));
+							if (income > 0)
+							{
+								graphics.DrawString(income.ToString(),
+									new Font(Constants.PatchFont, square_length * 6 / 11),
+									Constants.PatchIncomeBrush,
+									new Point(margin_width + j * square_length, margin_height + i * square_length));
+							}
 						}
 						painted++;
 						if (painted == 3) // price, time and income

@@ -83,7 +83,7 @@ namespace patchwork
 
 			if (has_new_patch)
 			{
-				PaintPatch(e, new_patch, PatchBrushes.NewPatchBrush, true);
+				PaintPatch(e, new_patch, Constants.NewPatchBrush, true);
 			}
         }
 
