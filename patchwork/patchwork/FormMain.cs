@@ -90,14 +90,7 @@ namespace patchwork
 
         private void PanelPatches_Paint(object sender, PaintEventArgs e)
         {
-			//if (patches.IsPatchTaken())
-			//{
-			//	patches.PaintTakenPatch(e);
-			//}
-			//else
-			//{
-				patches.Paint(e);
-			//}
+			patches.Paint(e);
 		}
 
 		private void PanelPatches_MouseDown(object sender, MouseEventArgs e)

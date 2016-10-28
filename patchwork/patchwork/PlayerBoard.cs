@@ -222,9 +222,14 @@ namespace patchwork
 			return false;
 		}
 
+		private bool HasEnoughMoney()
+		{
+			return new_patch.GetPrice() <= points;
+		}
+
 		public bool FixPatch(Point mouse_position)
 		{
-			if (!IsPatchesIntersection())
+			if (!IsPatchesIntersection() && HasEnoughMoney())
 			{
 				patches.Add(new_patch);
 				has_new_patch = false;
