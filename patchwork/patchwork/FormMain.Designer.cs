@@ -225,6 +225,7 @@
 			this.PanelPlayerPoints.Name = "PanelPlayerPoints";
 			this.PanelPlayerPoints.Size = new System.Drawing.Size(67, 25);
 			this.PanelPlayerPoints.TabIndex = 2;
+			this.PanelPlayerPoints.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPlayerPoints_Paint);
 			// 
 			// PanelPlayerPrize
 			// 
@@ -245,6 +246,7 @@
 			this.PanelPlayerIncome.Name = "PanelPlayerIncome";
 			this.PanelPlayerIncome.Size = new System.Drawing.Size(69, 25);
 			this.PanelPlayerIncome.TabIndex = 4;
+			this.PanelPlayerIncome.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPlayerIncome_Paint);
 			// 
 			// TableLayoutPanelBoard
 			// 
@@ -301,6 +303,7 @@
 			this.PanelOpponentPoints.Name = "PanelOpponentPoints";
 			this.PanelOpponentPoints.Size = new System.Drawing.Size(68, 25);
 			this.PanelOpponentPoints.TabIndex = 3;
+			this.PanelOpponentPoints.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponentPoints_Paint);
 			// 
 			// PanelOpponentPrize
 			// 
@@ -321,6 +324,7 @@
 			this.PanelOpponentIncome.Name = "PanelOpponentIncome";
 			this.PanelOpponentIncome.Size = new System.Drawing.Size(69, 25);
 			this.PanelOpponentIncome.TabIndex = 5;
+			this.PanelOpponentIncome.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponentIncome_Paint);
 			// 
 			// FormMain
 			// 

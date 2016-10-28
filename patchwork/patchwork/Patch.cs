@@ -192,5 +192,20 @@ namespace patchwork
 		{
 			return taken;
 		}
+
+		public int GetPrice()
+		{
+			return price;
+		}
+
+		public int GetTime()
+		{
+			return time;
+		}
+
+		public int GetIncome()
+		{
+			return income;
+		}
 	}
 }

@@ -153,12 +153,26 @@ namespace patchwork
 					{
 						patches.MarkTakenPatch();
 						player_boards[turn].PutPatch();
-						player_panels[turn].Invalidate();
+						//player_panels[turn].Invalidate();
 						this.PanelPatches.Invalidate();
+						InvalidateTableLayoutPanelMain();
 						GiveTurnToNextPlayer();
 					}
 				}
 			}
+		}
+
+		private void InvalidateTableLayoutPanelMain()
+		{
+			this.PanelPlayer.Invalidate();
+			this.PanelPlayerPoints.Invalidate();
+			this.PanelPlayerPrize.Invalidate();
+			this.PanelPlayerIncome.Invalidate();
+
+			this.PanelOpponent.Invalidate();
+			this.PanelOpponentPoints.Invalidate();
+			this.PanelOpponentPrize.Invalidate();
+			this.PanelOpponentIncome.Invalidate();
 		}
 
 		private void GiveTurnToNextPlayer()
@@ -173,56 +187,24 @@ namespace patchwork
 			}
 		}
 
-		private void PanelPlayerMouseDown(MouseEventArgs e)
+		private void PanelPlayerPoints_Paint(object sender, PaintEventArgs e)
 		{
-			player_boards[turn].TakePatch(new Point(e.X, e.Y));
+			player_boards[Turn.PLAYER].PaintPoints(e);
 		}
 
-		private void PanelPlayerMouseMove(MouseEventArgs e)
+		private void PanelPlayerIncome_Paint(object sender, PaintEventArgs e)
 		{
-			if (player_boards[turn].IsPatchTaken())
-			{
-				player_boards[turn].MovePatch(new Point(e.X, e.Y));
-				player_panels[turn].Invalidate();
-			}
+			player_boards[Turn.PLAYER].PaintIncome(e);
 		}
 
-		private void PanelPlayerMouseUp()
+		private void PanelOpponentPoints_Paint(object sender, PaintEventArgs e)
 		{
-			player_boards[turn].PutPatch();
+			player_boards[Turn.OPPONENT].PaintPoints(e);
 		}
 
-		private void PanelPlayerMouseDoubleClick(MouseEventArgs e) {
-			if (player_boards[turn].IsClickOnNewPatch(new Point(e.X, e.Y)))
-			{
-				if (player_boards[turn].FixPatch(new Point(e.X, e.Y)))
-				{
-					patches.MarkTakenPatch();
-					player_panels[turn].Invalidate();
-					this.PanelPatches.Invalidate();
-					GiveTurnToNextPlayer();
-				}
-			}
-		}
-
-		private void PanelOpponent_MouseDown(object sender, MouseEventArgs e)
+		private void PanelOpponentIncome_Paint(object sender, PaintEventArgs e)
 		{
-
-		}
-
-		private void PanelOpponent_MouseMove(object sender, MouseEventArgs e)
-		{
-
-		}
-
-		private void PanelOpponent_MouseUp(object sender, MouseEventArgs e)
-		{
-
-		}
-
-		private void PanelOpponent_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-
+			player_boards[Turn.OPPONENT].PaintIncome(e);
 		}
 	}
 }

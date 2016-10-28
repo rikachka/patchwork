@@ -31,13 +31,18 @@ namespace patchwork
 
 		List<Patch> patches = new List<Patch>();
 
+		int points, time, income;
+
 		public PlayerBoard(TableLayoutPanel panel_player_)
         {
             panel_player = panel_player_;
-            panel_board = (Panel) panel_player.GetControlFromPosition(0, 0);
+            panel_board = (Panel)panel_player.GetControlFromPosition(0, 0);
             panel_points = (Panel)panel_player.GetControlFromPosition(0, 1);
             panel_prize = (Panel)panel_player.GetControlFromPosition(1, 1);
             panel_income = (Panel)panel_player.GetControlFromPosition(2, 1);
+			points = 7;
+			time = 0;
+			income = 0;
         }
 
 		void CountDrawingInfo()
@@ -116,6 +121,9 @@ namespace patchwork
 			new_patch = patch;
 			has_new_patch = true;
 			new_patch.SetPosition(CalculatePatchPositionByCentrePoint(new Point(0, 0)));
+			points -= new_patch.GetPrice();
+			time += new_patch.GetTime();
+			income += new_patch.GetIncome();
 		}
 
 		public void DeleteNewPatch()
@@ -266,5 +274,50 @@ namespace patchwork
 		{
 			return has_new_patch && GetNewPatchRectangle().Contains(mouse_position);
 		}
-    }
+
+		public int GetPoints()
+		{
+			return points;
+		}
+
+		public int GetTime()
+		{
+			return time;
+		}
+
+		public int GetIncome()
+		{
+			return income;
+		}
+
+		public void PaintPoints(PaintEventArgs e)
+		{
+			int panel_width = panel_points.Width,
+				panel_height = panel_points.Height;
+			Bitmap pole = new Bitmap(panel_width, panel_height);
+			Graphics graphics = Graphics.FromImage(pole);
+			graphics.DrawString(points.ToString(),
+					new Font(Constants.PatchFont, panel_height * 6 / 11),
+					Constants.PatchPriceBrush,
+					new Point(0, 0));
+			e.Graphics.DrawImage(pole,
+				0,
+				0);
+		}
+
+		public void PaintIncome(PaintEventArgs e)
+		{
+			int panel_width = panel_income.Width,
+				panel_height = panel_income.Height;
+			Bitmap pole = new Bitmap(panel_width, panel_height);
+			Graphics graphics = Graphics.FromImage(pole);
+			graphics.DrawString(income.ToString(),
+					new Font(Constants.PatchFont, panel_height * 6 / 11),
+					Constants.PatchIncomeBrush,
+					new Point(0, 0));
+			e.Graphics.DrawImage(pole,
+				0,
+				0);
+		}
+	}
 }
