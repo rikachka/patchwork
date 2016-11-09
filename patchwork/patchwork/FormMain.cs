@@ -24,6 +24,8 @@ namespace patchwork
 		Patches patches;
 		Turn turn;
 
+		TimeBoard time_board;
+
 		//TranspCtrl PanelOver = new TranspCtrl();
 		//ExtendedPanel PanelOver = new ExtendedPanel();
 		//Panel PanelOver = new Panel();
@@ -41,6 +43,8 @@ namespace patchwork
 
 			opponent_board = new PlayerBoard(this.TableLayoutPanelOpponent);
 			player_boards[Turn.OPPONENT] = opponent_board;
+
+			time_board = new TimeBoard(this.TableLayoutPanelBoard);
 		}
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -198,6 +202,11 @@ namespace patchwork
 		private void PanelOpponentIncome_Paint(object sender, PaintEventArgs e)
 		{
 			player_boards[Turn.OPPONENT].PaintIncome(e);
+		}
+
+		private void PanelBoard_Paint(object sender, PaintEventArgs e)
+		{
+			time_board.Paint(e);
 		}
 	}
 }

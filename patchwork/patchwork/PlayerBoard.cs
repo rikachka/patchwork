@@ -15,6 +15,7 @@ namespace patchwork
         Panel panel_points;
         Panel panel_prize;
         Panel panel_income;
+
         Graphics c;
         Bitmap POLE;
 

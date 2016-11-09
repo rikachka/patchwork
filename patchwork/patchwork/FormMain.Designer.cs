@@ -161,6 +161,7 @@
 			this.PanelBoard.Name = "PanelBoard";
 			this.PanelBoard.Size = new System.Drawing.Size(216, 193);
 			this.PanelBoard.TabIndex = 2;
+			this.PanelBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelBoard_Paint);
 			// 
 			// TableLayoutPanelMain
 			// 
