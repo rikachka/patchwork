@@ -150,6 +150,7 @@ namespace patchwork
 					{
 						patches.MarkTakenPatch();
 						player_boards[turn].PutPatch();
+						time_board.SetTime(turn, player_boards[turn].GetTime());
 						this.PanelPatches.Invalidate();
 						InvalidateTableLayoutPanelMain();
 						GiveTurnToNextPlayer();

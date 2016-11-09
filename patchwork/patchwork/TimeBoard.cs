@@ -24,7 +24,7 @@ namespace patchwork
 			square_length,
 			margin_width, margin_height;
 
-		Dictionary<Turn, int> time = new Dictionary<Turn, int>();
+		Dictionary<Turn, int> times = new Dictionary<Turn, int>();
 
 		enum Directions { RIGHT, DOWN, LEFT, UP };
 
@@ -33,8 +33,8 @@ namespace patchwork
 			panel_whole = panel_whole_;
 			panel_board = (Panel)panel_whole.GetControlFromPosition(0, 0);
 			panel_prize = (Panel)panel_whole.GetControlFromPosition(1, 1);
-			time[Turn.PLAYER] = 0;
-			time[Turn.OPPONENT] = 39;
+			times[Turn.PLAYER] = 0;
+			times[Turn.OPPONENT] = 0;
 		}
 
 		void CountDrawingInfo()
@@ -180,8 +180,8 @@ namespace patchwork
 
 		void PaintPlayersTokens()
 		{
-			PaintPlayerToken(Constants.playerTokenBrush, DetermineTokensCoordinates(time[Turn.PLAYER]));
-			PaintPlayerToken(Constants.opponentTokenBrush, DetermineTokensCoordinates(time[Turn.OPPONENT]));
+			PaintPlayerToken(Constants.playerTokenBrush, DetermineTokensCoordinates(times[Turn.PLAYER]));
+			PaintPlayerToken(Constants.opponentTokenBrush, DetermineTokensCoordinates(times[Turn.OPPONENT]));
 		}
 
 		void PaintPlayerToken(Brush brush, Point point)
@@ -191,6 +191,11 @@ namespace patchwork
 					margin_height + point.Y * square_length,
 					square_length,
 					square_length);
+		}
+
+		public void SetTime(Turn turn, int time)
+		{
+			times[turn] = time;
 		}
 	}
 }
