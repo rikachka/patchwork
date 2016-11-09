@@ -291,6 +291,11 @@ namespace patchwork
 			return time;
 		}
 
+		public void SetTime(int time_new)
+		{
+			time = time_new;
+		}
+
 		public int GetIncome()
 		{
 			return income;

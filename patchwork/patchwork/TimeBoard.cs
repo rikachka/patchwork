@@ -197,5 +197,11 @@ namespace patchwork
 		{
 			times[turn] = time;
 		}
+
+		public int MoveForward(Turn turn)
+		{
+			times[turn] = times[(Turn)(1 - (int)turn)] + 1;
+			return times[turn];
+		}
 	}
 }

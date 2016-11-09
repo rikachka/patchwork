@@ -69,18 +69,10 @@ namespace patchwork
 			}
 		}
 
-		private void PanelPlayer_Layout(object sender, LayoutEventArgs e)
-        {
-        }
-
         private void PanelPlayer_Paint(object sender, PaintEventArgs e)
         {
             player_board.Paint(e);
         }
-
-        private void PanelOpponent_Layout(object sender, LayoutEventArgs e)
-        {
-		}
 
         private void PanelOpponent_Paint(object sender, PaintEventArgs e)
         {
@@ -209,6 +201,14 @@ namespace patchwork
 		private void PanelBoard_Paint(object sender, PaintEventArgs e)
 		{
 			time_board.Paint(e);
+		}
+
+		private void PanelBoard_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			int time = time_board.MoveForward(turn);
+			player_boards[turn].SetTime(time);
+			GiveTurnToNextPlayer();
+			this.PanelBoard.Invalidate();
 		}
 	}
 }
