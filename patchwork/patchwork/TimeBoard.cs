@@ -8,11 +8,34 @@ using System.Drawing;
 
 namespace patchwork
 {
+	class TimeSpot
+	{
+		public int length;
+		public bool income;
+		public bool patch;
+		
+		public TimeSpot(int length_, bool income_, bool patch_)
+		{
+			length = length_;
+			income = income_;
+			patch = patch_;
+		}
+
+		public TimeSpot()
+		{
+			length = 1;
+			income = false;
+			patch = false;
+		}
+	}
+
 	class TimeBoard
 	{
 		TableLayoutPanel panel_whole;
 		Panel panel_board;
 		Panel panel_prize;
+		int time_spots_number = 54;
+		TimeSpot[] time_spots;
 
 		Graphics c;
 		Bitmap POLE;
@@ -35,6 +58,35 @@ namespace patchwork
 			panel_prize = (Panel)panel_whole.GetControlFromPosition(1, 1);
 			times[Turn.PLAYER] = 0;
 			times[Turn.OPPONENT] = 0;
+
+			CreateTimeSpots();
+		}
+
+		void CreateTimeSpots()
+		{
+			time_spots = new TimeSpot[time_spots_number];
+			for (int i = 0; i < time_spots_number; i++)
+			{
+				time_spots[i] = new TimeSpot();
+			}
+			time_spots[0] = new TimeSpot(3, false, false);
+			time_spots[5] = new TimeSpot(1, true, false);
+			time_spots[10] = new TimeSpot(2, false, false);
+			time_spots[11] = new TimeSpot(1, true, false);
+			time_spots[17] = new TimeSpot(1, true, false);
+			time_spots[20] = new TimeSpot(2, false, true);
+			time_spots[23] = new TimeSpot(1, true, false);
+			time_spots[26] = new TimeSpot(1, false, true);
+			time_spots[29] = new TimeSpot(1, true, false);
+			time_spots[30] = new TimeSpot(2, false, false);
+			time_spots[32] = new TimeSpot(1, false, true);
+			time_spots[35] = new TimeSpot(1, true, false);
+			time_spots[40] = new TimeSpot(2, false, false);
+			time_spots[41] = new TimeSpot(1, true, false);
+			time_spots[44] = new TimeSpot(1, false, true);
+			time_spots[47] = new TimeSpot(1, true, false);
+			time_spots[50] = new TimeSpot(2, false, true);
+			time_spots[53] = new TimeSpot(4, true, false);
 		}
 
 		void CountDrawingInfo()
@@ -55,30 +107,104 @@ namespace patchwork
 			POLE = new Bitmap(panel_board.Width, panel_board.Height);
 			c = Graphics.FromImage(POLE);
 			c.FillRectangle(new SolidBrush(Color.Blue), margin_width, margin_height, board_length, board_length);
-			for (int i = 0; i <= squares_number; i++)
-			{
-				c.DrawLine(new Pen(Color.Black),
-					margin_width + i * square_length,
-					margin_height,
-					margin_width + i * square_length,
-					margin_height + board_length);
-			}
-			for (int i = 0; i <= squares_number; i++)
-			{
-				c.DrawLine(new Pen(Color.Black),
-					margin_width,
-					margin_height + i * square_length,
-					margin_width + board_length,
-					margin_height + i * square_length);
-			}
 
+			PaintTimeSpots();
 			PaintBorders();
-			PaintPlayersTokens();
+			//PaintPlayersTokens();
 
 			e.Graphics.DrawImage(POLE, 0, 0);
 		}
 
-		public void PaintBorders()
+		Size ShiftPointByDirection(Directions direction, int length)
+		{
+			switch (direction)
+			{
+				case Directions.RIGHT:
+					return new Size(length, 0);
+				case Directions.DOWN:
+					return new Size(0, length);
+				case Directions.LEFT:
+					return new Size(-length, 0);
+				case Directions.UP:
+					return new Size(0, -length);
+				default:
+					return new Size(0, 0);
+			}
+		}
+
+		void PaintTimeSpots()
+		{
+			Point point = new Point(0, 0);
+			Rectangle future_points = new Rectangle(0, 0, squares_number, squares_number);
+			Directions direction = Directions.RIGHT,
+				next_direction = Directions.RIGHT;
+			for (int i = 0; i < time_spots_number - 1; i++)
+			{
+				int time_spot_length = time_spots[i].length - 1;
+				Size shift = ShiftPointByDirection(direction, time_spot_length);
+				Point point_end = point + shift;
+
+				Size additional_shift = ShiftPointByDirection(direction);
+				while (!future_points.Contains(point_end + additional_shift))
+				{
+					next_direction = (Directions)((int)(next_direction + 1) % 4);
+					switch (next_direction)
+					{
+						case Directions.RIGHT:
+							future_points.Height -= 1;
+							additional_shift = ShiftPointByDirection(next_direction);
+							break;
+						case Directions.DOWN:
+							future_points.X += 1;
+							future_points.Y += 1;
+							future_points.Width -= 1;
+							future_points.Height -= 1;
+							additional_shift = ShiftPointByDirection(next_direction);
+							break;
+						case Directions.LEFT:
+							additional_shift = new Size(0, 0);
+							break;
+						case Directions.UP:
+							future_points.Width -= 1;
+							additional_shift = new Size(0, 0);
+							break;
+					}
+				}
+				
+				if (next_direction == Directions.RIGHT || next_direction == Directions.DOWN)
+				{
+					direction = next_direction;
+				}
+
+				Size point_end_shift = new Size();
+				switch (direction)
+				{
+					case Directions.RIGHT:
+					case Directions.DOWN:
+						point_end_shift = new Size(1, 1);
+						break;
+					case Directions.LEFT:
+						point_end_shift = new Size(-1, 1);
+						break;
+					case Directions.UP:
+						point_end_shift = new Size(-1, -1);
+						break;
+				}
+				Point[] points = {
+					new Point(margin_width + point.X * square_length, margin_height + point.Y * square_length),
+					new Point(margin_width + (point_end + point_end_shift).X * square_length, margin_height + point.Y * square_length),
+					new Point(margin_width + (point_end + point_end_shift).X * square_length, margin_height + (point_end + point_end_shift).Y * square_length),
+					new Point(margin_width + point.X * square_length, margin_height + (point_end + point_end_shift).Y * square_length),
+					new Point(margin_width + point.X * square_length, margin_height + point.Y * square_length)
+				};
+				c.DrawLines(new Pen(Color.Black, 2), points);
+
+				point = point_end + additional_shift;
+				direction = next_direction;
+			}
+		}
+
+		void PaintBorders()
 		{
 			Directions direction = Directions.RIGHT;
 			int active_squares_width = squares_number;
