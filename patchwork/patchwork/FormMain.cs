@@ -150,7 +150,6 @@ namespace patchwork
 					{
 						patches.MarkTakenPatch();
 						player_boards[turn].PutPatch();
-						//player_panels[turn].Invalidate();
 						this.PanelPatches.Invalidate();
 						InvalidateTableLayoutPanelMain();
 						GiveTurnToNextPlayer();
@@ -170,6 +169,8 @@ namespace patchwork
 			this.PanelOpponentPoints.Invalidate();
 			this.PanelOpponentPrize.Invalidate();
 			this.PanelOpponentIncome.Invalidate();
+
+			this.PanelBoard.Invalidate();
 		}
 
 		private void GiveTurnToNextPlayer()

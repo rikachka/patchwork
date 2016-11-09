@@ -16,6 +16,8 @@ namespace patchwork
 		public static Brush PatchPriceBrush = Brushes.Black;
 		public static Brush PatchTimeBrush = Brushes.Brown;
 		public static Brush PatchIncomeBrush = Brushes.Blue;
+		public static Brush playerTokenBrush = Brushes.Yellow;
+		public static Brush opponentTokenBrush = Brushes.GreenYellow;
 		public static string PatchFont = "Arial";
 	}
 

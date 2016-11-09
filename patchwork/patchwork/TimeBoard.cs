@@ -24,11 +24,17 @@ namespace patchwork
 			square_length,
 			margin_width, margin_height;
 
+		Dictionary<Turn, int> time = new Dictionary<Turn, int>();
+
+		enum Directions { RIGHT, DOWN, LEFT, UP };
+
 		public TimeBoard(TableLayoutPanel panel_whole_)
 		{
 			panel_whole = panel_whole_;
 			panel_board = (Panel)panel_whole.GetControlFromPosition(0, 0);
 			panel_prize = (Panel)panel_whole.GetControlFromPosition(1, 1);
+			time[Turn.PLAYER] = 0;
+			time[Turn.OPPONENT] = 39;
 		}
 
 		void CountDrawingInfo()
@@ -41,8 +47,6 @@ namespace patchwork
 			margin_width = (panel_width - board_length) / 2 + margin;
 			margin_height = (panel_height - board_length) / 2 + margin;
 		}
-
-		enum Directions { RIGHT, DOWN, LEFT, UP };
 
 		public void Paint(PaintEventArgs e)
 		{
@@ -69,6 +73,7 @@ namespace patchwork
 			}
 
 			PaintBorders();
+			PaintPlayersTokens();
 
 			e.Graphics.DrawImage(POLE, 0, 0);
 		}
@@ -119,6 +124,73 @@ namespace patchwork
 				point_start = point_end;
 				direction = (Directions)((int)(direction + 1) % 4);
 			}
+		}
+
+		Size ShiftPointByDirection(Directions direction)
+		{
+			switch (direction)
+			{
+				case Directions.RIGHT:
+					return new Size(1, 0);
+				case Directions.DOWN:
+					return new Size(0, 1);
+				case Directions.LEFT:
+					return new Size(-1, 0);
+				case Directions.UP:
+					return new Size(0, -1);
+				default:
+					return new Size(0, 0);
+			}
+		}
+
+		Point DetermineTokensCoordinates(int time)
+		{
+			Point point = new Point(0, 0);
+			Rectangle future_points = new Rectangle(0, 0, squares_number, squares_number);
+			Directions direction = Directions.RIGHT;
+			for (int i = 0; i < time; i++)
+			{
+				Size shift = ShiftPointByDirection(direction);
+				while (!future_points.Contains(point + shift))
+				{
+					switch (direction)
+					{
+						case Directions.RIGHT:
+							future_points.Height -= 1;
+							future_points.Y += 1;
+							break;
+						case Directions.DOWN:
+							future_points.Width -= 1;
+							break;
+						case Directions.LEFT:
+							future_points.Height -= 1;
+							break;
+						case Directions.UP:
+							future_points.Width -= 1;
+							future_points.X += 1;
+							break;
+					}
+					direction = (Directions)((int)(direction + 1) % 4);
+					shift = ShiftPointByDirection(direction);
+				}
+				point = point + shift;
+			}
+			return point;
+		}
+
+		void PaintPlayersTokens()
+		{
+			PaintPlayerToken(Constants.playerTokenBrush, DetermineTokensCoordinates(time[Turn.PLAYER]));
+			PaintPlayerToken(Constants.opponentTokenBrush, DetermineTokensCoordinates(time[Turn.OPPONENT]));
+		}
+
+		void PaintPlayerToken(Brush brush, Point point)
+		{
+			c.FillEllipse(brush,
+					margin_width + point.X * square_length,
+					margin_height + point.Y * square_length,
+					square_length,
+					square_length);
 		}
 	}
 }
