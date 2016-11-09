@@ -121,9 +121,6 @@ namespace patchwork
 			new_patch = patch;
 			has_new_patch = true;
 			new_patch.SetPosition(CalculatePatchPositionByCentrePoint(new Point(0, 0)));
-			points -= new_patch.GetPrice();
-			time += new_patch.GetTime();
-			income += new_patch.GetIncome();
 		}
 
 		public void DeleteNewPatch()
@@ -224,7 +221,7 @@ namespace patchwork
 
 		private bool HasEnoughMoney()
 		{
-			return new_patch.GetPrice() <= points;
+			return (new_patch.GetPrice() <= points);
 		}
 
 		public bool FixPatch(Point mouse_position)
@@ -232,6 +229,9 @@ namespace patchwork
 			if (!IsPatchesIntersection() && HasEnoughMoney())
 			{
 				patches.Add(new_patch);
+				points -= new_patch.GetPrice();
+				time += new_patch.GetTime();
+				income += new_patch.GetIncome();
 				has_new_patch = false;
 				return true;
 			}
