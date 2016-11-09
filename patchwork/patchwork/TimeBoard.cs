@@ -110,7 +110,6 @@ namespace patchwork
 
 			PaintTimeSpots();
 			PaintBorders();
-			//PaintPlayersTokens();
 
 			e.Graphics.DrawImage(POLE, 0, 0);
 		}
@@ -130,6 +129,11 @@ namespace patchwork
 				default:
 					return new Size(0, 0);
 			}
+		}
+
+		Size ShiftPointByDirection(Directions direction)
+		{
+			return ShiftPointByDirection(direction, 1);
 		}
 
 		void PaintTimeSpots()
@@ -199,9 +203,28 @@ namespace patchwork
 				};
 				c.DrawLines(new Pen(Color.Black, 2), points);
 
+				Point point_min = new Point(Math.Min(point.X, (point_end + point_end_shift).X), Math.Min(point.Y, (point_end + point_end_shift).Y));
+				if (i == times[Turn.PLAYER])
+				{
+					PaintPlayerToken(Constants.playerTokenBrush, point_min);
+				}
+				if (i == times[Turn.OPPONENT])
+				{
+					PaintPlayerToken(Constants.opponentTokenBrush, point_min);
+				}
+
 				point = point_end + additional_shift;
 				direction = next_direction;
 			}
+		}
+
+		void PaintPlayerToken(Brush brush, Point point)
+		{
+			c.FillEllipse(brush,
+					margin_width + point.X * square_length,
+					margin_height + point.Y * square_length,
+					square_length,
+					square_length);
 		}
 
 		void PaintBorders()
@@ -250,73 +273,6 @@ namespace patchwork
 				point_start = point_end;
 				direction = (Directions)((int)(direction + 1) % 4);
 			}
-		}
-
-		Size ShiftPointByDirection(Directions direction)
-		{
-			switch (direction)
-			{
-				case Directions.RIGHT:
-					return new Size(1, 0);
-				case Directions.DOWN:
-					return new Size(0, 1);
-				case Directions.LEFT:
-					return new Size(-1, 0);
-				case Directions.UP:
-					return new Size(0, -1);
-				default:
-					return new Size(0, 0);
-			}
-		}
-
-		Point DetermineTokensCoordinates(int time)
-		{
-			Point point = new Point(0, 0);
-			Rectangle future_points = new Rectangle(0, 0, squares_number, squares_number);
-			Directions direction = Directions.RIGHT;
-			for (int i = 0; i < time; i++)
-			{
-				Size shift = ShiftPointByDirection(direction);
-				while (!future_points.Contains(point + shift))
-				{
-					switch (direction)
-					{
-						case Directions.RIGHT:
-							future_points.Height -= 1;
-							future_points.Y += 1;
-							break;
-						case Directions.DOWN:
-							future_points.Width -= 1;
-							break;
-						case Directions.LEFT:
-							future_points.Height -= 1;
-							break;
-						case Directions.UP:
-							future_points.Width -= 1;
-							future_points.X += 1;
-							break;
-					}
-					direction = (Directions)((int)(direction + 1) % 4);
-					shift = ShiftPointByDirection(direction);
-				}
-				point = point + shift;
-			}
-			return point;
-		}
-
-		void PaintPlayersTokens()
-		{
-			PaintPlayerToken(Constants.playerTokenBrush, DetermineTokensCoordinates(times[Turn.PLAYER]));
-			PaintPlayerToken(Constants.opponentTokenBrush, DetermineTokensCoordinates(times[Turn.OPPONENT]));
-		}
-
-		void PaintPlayerToken(Brush brush, Point point)
-		{
-			c.FillEllipse(brush,
-					margin_width + point.X * square_length,
-					margin_height + point.Y * square_length,
-					square_length,
-					square_length);
 		}
 
 		public void SetTime(Turn turn, int time)
