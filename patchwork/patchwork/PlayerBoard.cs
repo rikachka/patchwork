@@ -291,9 +291,10 @@ namespace patchwork
 			return time;
 		}
 
-		public void SetTime(int time_new)
+		public void SpendTime(int time_spent)
 		{
-			time = time_new;
+			time += time_spent;
+			points += time_spent;
 		}
 
 		public int GetIncome()
