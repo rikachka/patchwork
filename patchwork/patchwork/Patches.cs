@@ -126,13 +126,10 @@ namespace patchwork
 			CountDrawingInfo();
 			POLE = new Bitmap(panel_patches.Width, 2 * panel_patches.Height);
 			graphics = Graphics.FromImage(POLE);
-			//c.FillRectangle(new SolidBrush(Color.Green), margin_width, margin_height, board_width, board_height);
 			PaintField(squares_number_width, squares_number_height, square_length,
 				margin_width, margin_height, board_width, board_height);
 			PaintPatches();
 			e.Graphics.DrawImage(POLE, 0, 0);
-
-			//PaintTakenPatch(e);
 		}
 
 		void PaintField(int squares_number_width, int squares_number_height, int square_length, 
@@ -207,51 +204,6 @@ namespace patchwork
 			PaintPatchInField(patch_index, prev_squares_in_width);
 		}
 
-			//void PaintPatches()
-			//{
-			//	for (int patch_index = 0; patch_index < patches.Length; patch_index++)
-			//	{
-			//		if (!PaintPatchInField(patch_index))
-			//		{
-			//			break;
-			//		}
-			//	}
-			//}
-
-			//bool PaintPatchInField(int patch_index)
-			//{
-			//	Patch patch = patches[patch_index];
-			//	int prev_squares_in_width = CountPrevSquaresWidth(patch_index);
-
-			//	if (patch.GetWidth() + prev_squares_in_width > squares_number_width)
-			//	{
-			//		return false;
-			//	}
-
-			//	int margin_squares = 0;
-			//	if (patch.GetHeight() <= 3)
-			//	{
-			//		margin_squares = 1;
-			//	}
-
-			//	SolidBrush patch_brush;
-			//	if (taken_patch_index == patch_index)
-			//	{
-			//		patch_brush = new SolidBrush(Color.Red);
-			//	}
-			//	else
-			//	{
-			//		patch_brush = new SolidBrush(Color.Green);
-			//	}
-
-			//	patch.Paint(graphics, patch_brush,
-			//		margin_width + prev_squares_in_width * square_length,
-			//		margin_height + margin_squares * square_length,
-			//		square_length);
-
-			//	return true;
-			//}
-
 		int CountPrevSquaresWidth(int patch_index)
 		{
 			int prev_squares_in_width = 0;
@@ -296,7 +248,6 @@ namespace patchwork
 					{
 						taken_patch_index = patch_index;
 						mouse_position = new Point(x, y);
-						//PaintPatchInField(patch_index);
 						break;
 					}
 					prev_squares_in_width += patch.GetWidth() + 1;

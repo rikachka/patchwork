@@ -18,17 +18,12 @@ namespace patchwork
 
         PlayerBoard player_board;
         PlayerBoard opponent_board;
-		//PlayerBoard[] player_boards = new PlayerBoard[2]; 
 		Dictionary<Turn, PlayerBoard> player_boards = new Dictionary<Turn, PlayerBoard>();
 		Dictionary<Turn, Panel> player_panels = new Dictionary<Turn, Panel>();
 		Patches patches;
 		Turn turn;
 
 		TimeBoard time_board;
-
-		//TranspCtrl PanelOver = new TranspCtrl();
-		//ExtendedPanel PanelOver = new ExtendedPanel();
-		//Panel PanelOver = new Panel();
 
 		public FormMain()
         {
