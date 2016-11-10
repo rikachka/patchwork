@@ -138,11 +138,13 @@ namespace patchwork
 			{
 				if (player_boards[turn].IsClickOnNewPatch(new Point(e.X, e.Y)))
 				{
+					int taken_patch_time = player_boards[turn].GetNewPatchTime();
 					if (player_boards[turn].FixPatch(new Point(e.X, e.Y)))
 					{
 						patches.MarkTakenPatch();
 						player_boards[turn].PutPatch();
-						time_board.SetTime(turn, player_boards[turn].GetTime());
+						TimeChange time_change = time_board.SetTime(turn, player_boards[turn].GetTime() + taken_patch_time);
+						player_boards[turn].SpendTime(time_change);
 						this.PanelPatches.Invalidate();
 						InvalidateTableLayoutPanelMain();
 						GiveTurnToNextPlayer();
@@ -205,10 +207,13 @@ namespace patchwork
 
 		private void PanelBoard_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			int time = time_board.MoveForward(turn);
-			player_boards[turn].SpendTime(time);
+			TimeChange time_change = time_board.MoveForward(turn);
+			player_boards[turn].SpendTime(time_change, true);
+			player_boards[turn].DeleteNewPatch();
+			patches.PutOne();
 			GiveTurnToNextPlayer();
 			InvalidateTableLayoutPanelMain();
+			this.PanelPatches.Invalidate();
 		}
 	}
 }

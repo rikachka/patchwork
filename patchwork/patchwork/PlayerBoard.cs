@@ -225,13 +225,24 @@ namespace patchwork
 			return (new_patch.GetPrice() <= points);
 		}
 
+		public int GetNewPatchTime()
+		{
+			if (has_new_patch) {
+				return new_patch.GetTime();
+			}
+			else
+			{
+				return 0;
+			}
+		}
+
 		public bool FixPatch(Point mouse_position)
 		{
 			if (!IsPatchesIntersection() && HasEnoughMoney())
 			{
 				patches.Add(new_patch);
 				points -= new_patch.GetPrice();
-				time += new_patch.GetTime();
+				//time += new_patch.GetTime();
 				income += new_patch.GetIncome();
 				has_new_patch = false;
 				return true;
@@ -291,10 +302,14 @@ namespace patchwork
 			return time;
 		}
 
-		public void SpendTime(int time_spent)
+		public void SpendTime(TimeChange time_change, bool get_time_points = false)
 		{
-			time += time_spent;
-			points += time_spent;
+			time += time_change.time;
+			if (get_time_points)
+			{
+				points += time_change.time;
+			}
+			points += time_change.income * income;
 		}
 
 		public int GetIncome()

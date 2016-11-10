@@ -29,6 +29,27 @@ namespace patchwork
 		}
 	}
 
+	class TimeChange
+	{
+		public int time;
+		public int income;
+		public int patch;
+
+		public TimeChange(int time_, int income_, int patch_)
+		{
+			time = time_;
+			income = income_;
+			patch = patch_;
+		}
+
+		public TimeChange(int time_)
+		{
+			time = time_;
+			income = 0;
+			patch = 0;
+		}
+	}
+
 	class TimeBoard
 	{
 		TableLayoutPanel panel_whole;
@@ -304,16 +325,43 @@ namespace patchwork
 			}
 		}
 
-		public void SetTime(Turn turn, int time)
+		int GetIncomeCrossed(int time_start, int time_end)
 		{
-			times[turn] = time;
+			int income = 0;
+			for (int i = time_start + 1; i <= time_end; i++)
+			{
+				if (i < time_spots_number && time_spots[i].income)
+				{
+					income++;
+				} 
+			}
+			return income;
 		}
 
-		public int MoveForward(Turn turn)
+		int GetPatchCrossed(int time_start, int time_end)
 		{
-			int prev_time = times[turn];
-			times[turn] = times[(Turn)(1 - (int)turn)] + 1;
-			return times[turn] - prev_time;
+			int patches = 0;
+			for (int i = time_start + 1; i <= time_end; i++)
+			{
+				if (i < time_spots_number && time_spots[i].patch)
+				{
+					patches++;
+				}
+			}
+			return patches;
+		}
+
+		public TimeChange SetTime(Turn turn, int time_new)
+		{
+			int time_prev = times[turn];
+			times[turn] = time_new;
+			return new TimeChange(time_new - time_prev, GetIncomeCrossed(time_prev, time_new), GetPatchCrossed(time_prev, time_new));
+		}
+
+		public TimeChange MoveForward(Turn turn)
+		{
+			int time_new = times[(Turn)(1 - (int)turn)] + 1;
+			return SetTime(turn, time_new);
 		}
 	}
 }
