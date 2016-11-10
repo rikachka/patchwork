@@ -16,8 +16,12 @@ namespace patchwork
 		public static Brush PatchPriceBrush = Brushes.Black;
 		public static Brush PatchTimeBrush = Brushes.Brown;
 		public static Brush PatchIncomeBrush = Brushes.Blue;
-		public static Brush playerTokenBrush = Brushes.GreenYellow;
-		public static Brush opponentTokenBrush = Brushes.Pink;
+		public static Brush PlayerTokenBrush = Brushes.GreenYellow;
+		public static Brush OpponentTokenBrush = Brushes.Pink;
+		public static Brush TimeBoardBrush = Brushes.Coral;
+		public static Pen TimeBoardBordersPen = Pens.White;
+		public static Pen TimeSpotBordersPen = new Pen(Color.Black, 1);
+		public static Brush TimeBoardPatchBrush = Brushes.Brown;
 		public static string PatchFont = "Arial";
 	}
 

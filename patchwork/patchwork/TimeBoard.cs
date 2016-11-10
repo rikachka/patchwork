@@ -106,7 +106,7 @@ namespace patchwork
 
 			POLE = new Bitmap(panel_board.Width, panel_board.Height);
 			c = Graphics.FromImage(POLE);
-			c.FillRectangle(new SolidBrush(Color.Blue), margin_width, margin_height, board_length, board_length);
+			c.FillRectangle(Constants.TimeBoardBrush, margin_width, margin_height, board_length, board_length);
 
 			PaintTimeSpots();
 			PaintBorders();
@@ -201,16 +201,26 @@ namespace patchwork
 					new Point(margin_width + point.X * square_length, margin_height + (point_end + point_end_shift).Y * square_length),
 					new Point(margin_width + point.X * square_length, margin_height + point.Y * square_length)
 				};
-				c.DrawLines(new Pen(Color.Black, 2), points);
+				c.DrawLines(Constants.TimeSpotBordersPen, points);
 
 				Point point_min = new Point(Math.Min(point.X, (point_end + point_end_shift).X), Math.Min(point.Y, (point_end + point_end_shift).Y));
+
+				if (time_spots[i].income)
+				{
+					PaintIncomeButton(point_min);
+				}
+				if (time_spots[i].patch)
+				{
+					PaintPatch(point_min);
+				}
+
 				if (i == times[Turn.PLAYER])
 				{
-					PaintPlayerToken(Constants.playerTokenBrush, point_min);
+					PaintPlayerToken(Constants.PlayerTokenBrush, point_min);
 				}
 				if (i == times[Turn.OPPONENT])
 				{
-					PaintPlayerToken(Constants.opponentTokenBrush, point_min);
+					PaintPlayerToken(Constants.OpponentTokenBrush, point_min);
 				}
 
 				point = point_end + additional_shift;
@@ -220,11 +230,30 @@ namespace patchwork
 
 		void PaintPlayerToken(Brush brush, Point point)
 		{
+			int margin = 2;
 			c.FillEllipse(brush,
+					margin_width + point.X * square_length + margin,
+					margin_height + point.Y * square_length + margin,
+					square_length - margin * 2,
+					square_length - margin * 2);
+		}
+
+		void PaintIncomeButton(Point point)
+		{
+			c.FillEllipse(Constants.PatchIncomeBrush,
 					margin_width + point.X * square_length,
 					margin_height + point.Y * square_length,
-					square_length,
-					square_length);
+					square_length / 2,
+					square_length / 2);
+		}
+
+		void PaintPatch(Point point)
+		{
+			c.FillRectangle(Constants.TimeBoardPatchBrush,
+					margin_width + point.X * square_length,
+					margin_height + point.Y * square_length,
+					square_length / 2,
+					square_length / 2);
 		}
 
 		void PaintBorders()
@@ -265,7 +294,7 @@ namespace patchwork
 				{
 					break;
 				}
-				c.DrawLine(new Pen(Color.White),
+				c.DrawLine(Constants.TimeBoardBordersPen,
 					margin_width + point_start.X * square_length,
 					margin_height + point_start.Y * square_length,
 					margin_width + point_end.X * square_length,
