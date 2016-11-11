@@ -162,14 +162,15 @@ namespace patchwork
 
 		private void GiveTurnToNextPlayer()
 		{
-			if (turn == Turn.PLAYER)
-			{
-				turn = Turn.OPPONENT;
-			} 
-			else
-			{
-				turn = Turn.PLAYER;
-			}
+			//if (turn == Turn.PLAYER)
+			//{
+			//	turn = Turn.OPPONENT;
+			//} 
+			//else
+			//{
+			//	turn = Turn.PLAYER;
+			//}
+			turn = time_board.GetNextPlayer(turn);
 		}
 
 		private void PanelPlayerPoints_Paint(object sender, PaintEventArgs e)

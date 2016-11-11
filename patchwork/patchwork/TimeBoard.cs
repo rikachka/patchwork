@@ -363,5 +363,18 @@ namespace patchwork
 			int time_new = times[(Turn)(1 - (int)turn)] + 1;
 			return SetTime(turn, time_new);
 		}
+
+		public Turn GetNextPlayer(Turn current_player)
+		{
+			Turn other_player = (Turn)(1 - (int)current_player);
+			if (times[current_player] <= times[other_player])
+			{
+				return current_player;
+			}
+			else
+			{
+				return other_player;
+			}
+		}
 	}
 }
