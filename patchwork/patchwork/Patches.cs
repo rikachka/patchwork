@@ -57,40 +57,6 @@ namespace patchwork
 
 		void CreatePatches()
 		{
-			//patches = new List<Patch>();
-			//patches.Add(new Patch(new int[,] { { 1 }, { 1 } }, 2, 1, 0));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 1, 0 } }, 1, 3, 0));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 1, 0 } }, 3, 1, 0));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 1, 1 } }, 6, 5, 2));
-			//patches.Add(new Patch(new int[,] { { 1 }, { 1 }, { 1 } }, 2, 2, 0));
-			//patches.Add(new Patch(new int[,] { { 1 }, { 1 }, { 1 } }, 2, 2, 0));
-			//patches.Add(new Patch(new int[,] { { 1 }, { 1 }, { 1 }, { 1 } }, 3, 3, 1));
-			//patches.Add(new Patch(new int[,] { { 1, 0 }, { 1, 1 }, { 1, 1 } }, 7, 6, 3));
-			//patches.Add(new Patch(new int[,] { { 1, 0 }, { 1, 1 }, { 1, 1 } }, 3, 2, 1));
-			//patches.Add(new Patch(new int[,] { { 0, 1 }, { 1, 1 }, { 0, 1 } }, 2, 2, 0));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 0, 1 }, { 0, 1 } }, 4, 2, 1));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 0, 1 }, { 0, 1 } }, 4, 6, 2));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 0, 1 }, { 1, 1 } }, 1, 2, 0));
-			//patches.Add(new Patch(new int[,] { { 0, 0, 1 }, { 1, 1, 1 }, { 0, 0, 1 } }, 5, 5, 2));
-			//patches.Add(new Patch(new int[,] { { 1, 0 }, { 1, 1 }, { 1, 0 }, { 1, 0 } }, 3, 4, 1));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 1, 0 }, { 1, 0 }, { 1, 0 } }, 10, 3, 2));
-			//patches.Add(new Patch(new int[,] { { 1, 0 }, { 1, 1 }, { 1, 1 } }, 2, 2, 2));
-			//patches.Add(new Patch(new int[,] { { 0, 0, 1 }, { 0, 1, 1 }, { 1, 1, 0 } }, 10, 4, 3));
-			//patches.Add(new Patch(new int[,] { { 1, 0 }, { 1, 0 }, { 1, 1 }, { 0, 1 } }, 2, 3, 1));
-			//patches.Add(new Patch(new int[,] { { 1, 0, 1 }, { 1, 1, 1 }, { 0, 1, 0 } }, 3, 6, 2));
-			//patches.Add(new Patch(new int[,] { { 1, 1, 1 }, { 1, 1, 1 }, { 0, 1, 1 } }, 8, 6, 3));
-			//patches.Add(new Patch(new int[,] { { 1, 0 }, { 1, 0 }, { 1, 1 }, { 1, 1 } }, 10, 5, 3));
-			//patches.Add(new Patch(new int[,] { { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } }, 7, 2, 2));
-			//patches.Add(new Patch(new int[,] { { 0, 1, 0 }, { 1, 1, 0 }, { 0, 1, 1 }, { 0, 1, 0 } }, 2, 1, 0));
-			//patches.Add(new Patch(new int[,] { { 1, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 1 } }, 1, 2, 0));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 1, 0 }, { 1, 0 }, { 1, 1 } }, 1, 5, 1));
-			//patches.Add(new Patch(new int[,] { { 1, 1 }, { 1, 1 }, { 0, 1 }, { 0, 1 } }, 10, 5, 3));
-			//patches.Add(new Patch(new int[,] { { 0, 1 }, { 1, 1 }, { 1, 1 }, { 1, 0 } }, 4, 2, 0));
-			//patches.Add(new Patch(new int[,] { { 0, 1 }, { 1, 1 }, { 1, 1 }, { 0, 1 } }, 7, 4, 2));
-			//patches.Add(new Patch(new int[,] { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 } }, 0, 3, 1));
-			//patches.Add(new Patch(new int[,] { { 0, 1, 0 }, { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 } }, 1, 4, 1));
-			//patches.Add(new Patch(new int[,] { { 0, 1, 0 }, { 1, 1, 1 }, { 1, 1, 1 }, { 0, 1, 0 } }, 5, 3, 1));
-			//patches.Add(new Patch(new int[,] { { 1, 0, 1 }, { 1, 1, 1 }, { 1, 0, 1 } }, 2, 3, 0));
 			patches = new Patch[33];
 			patches[0] = new Patch(new int[,] { { 1 }, { 1 } }, 2, 1, 0);
 			patches[1] = new Patch(new int[,] { { 1, 1 }, { 1, 0 } }, 1, 3, 0);

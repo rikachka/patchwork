@@ -222,7 +222,12 @@ namespace patchwork
 
 		private bool HasEnoughMoney()
 		{
-			return (new_patch.GetPrice() <= points);
+			return HasEnoughMoney(new_patch);
+		}
+
+		public bool HasEnoughMoney(Patch patch)
+		{
+			return (patch.GetPrice() <= points);
 		}
 
 		public int GetNewPatchTime()

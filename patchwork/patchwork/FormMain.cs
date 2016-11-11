@@ -85,12 +85,13 @@ namespace patchwork
         {
 			patches.PutOne();
 			Patch patch = patches.TakeOne(e.X, e.Y);
-			if (patches.IsPatchTaken())
+			if (patches.IsPatchTaken() && player_boards[turn].HasEnoughMoney(patch))
 			{
 				player_boards[turn].AddNewPatch(patch);
 			} else
 			{
 				player_boards[turn].DeleteNewPatch();
+				patches.PutOne();
 			}
 			this.PanelPatches.Invalidate();
 			player_panels[turn].Invalidate();
@@ -162,14 +163,6 @@ namespace patchwork
 
 		private void GiveTurnToNextPlayer()
 		{
-			//if (turn == Turn.PLAYER)
-			//{
-			//	turn = Turn.OPPONENT;
-			//} 
-			//else
-			//{
-			//	turn = Turn.PLAYER;
-			//}
 			turn = time_board.GetNextPlayer(turn);
 		}
 
