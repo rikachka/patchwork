@@ -194,7 +194,6 @@
 			this.PanelPatches.Size = new System.Drawing.Size(678, 96);
 			this.PanelPatches.TabIndex = 3;
 			this.PanelPatches.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelPatches_Paint);
-			this.PanelPatches.Layout += new System.Windows.Forms.LayoutEventHandler(this.PanelPatches_Layout);
 			this.PanelPatches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PanelPatches_MouseDown);
 			// 
 			// TableLayoutPanelPlayer

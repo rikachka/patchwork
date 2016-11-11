@@ -29,6 +29,8 @@ namespace patchwork
         {
             InitializeComponent();
 
+			patches = new Patches(this.PanelPatches, this.TableLayoutPanelMain);
+
 			player_panels[Turn.PLAYER] = this.PanelPlayer;
 			player_panels[Turn.OPPONENT] = this.PanelOpponent;
 			turn = Turn.PLAYER;
@@ -72,11 +74,6 @@ namespace patchwork
         private void PanelOpponent_Paint(object sender, PaintEventArgs e)
         {
             opponent_board.Paint(e);
-        }
-
-        private void PanelPatches_Layout(object sender, LayoutEventArgs e)
-        {
-            patches = new Patches(this.PanelPatches, this.TableLayoutPanelMain);
         }
 
         private void PanelPatches_Paint(object sender, PaintEventArgs e)
