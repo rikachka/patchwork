@@ -241,13 +241,17 @@ namespace patchwork
 			}
 		}
 
-		public bool FixPatch(Point mouse_position)
+		public bool CheckPatch()
 		{
-			if (!IsPatchesIntersection() && HasEnoughMoney())
+			return has_new_patch && !IsPatchesIntersection() && HasEnoughMoney();
+		}
+
+		public bool FixPatch()
+		{
+			if (CheckPatch())
 			{
 				patches.Add(new_patch);
 				points -= new_patch.GetPrice();
-				//time += new_patch.GetTime();
 				income += new_patch.GetIncome();
 				has_new_patch = false;
 				return true;

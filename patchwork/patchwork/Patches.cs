@@ -227,30 +227,11 @@ namespace patchwork
 			return prev_squares_in_width;
 		}
 
-		//public int FindMaxIndexOfAvaliablePatch()
-		//{
-		//	int found_number = 0;
-		//	for (int patch_index = 0; patch_index < patches.Length; patch_index++)
-		//	{
-		//		Patch patch = patches[patch_index];
-		//		if (!patch.IsTaken())
-		//		{
-		//			found_number++;
-		//			if (found_number == 3)
-		//			{
-		//				return patch_index;
-		//			}
-		//		}
-		//	}
-		//	//index последнего доступного
-		//	return patches.Length - 1;
-		//}
-
 		public Patch TakeOne(int x, int y)
 		{
 			int prev_squares_in_width = 0;
 
-			int max_patch_index = 3; //FindMaxIndexOfAvaliablePatch();
+			int max_patch_index = 3; 
 			for (int patch_index = 0; patch_index < max_patch_index; patch_index++)
 			{
 				Patch patch = patches[patch_index];

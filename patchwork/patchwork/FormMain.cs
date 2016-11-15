@@ -85,13 +85,16 @@ namespace patchwork
 			if (patches.IsPatchTaken() && player_boards[turn].HasEnoughMoney(patch))
 			{
 				player_boards[turn].AddNewPatch(patch);
-			} else
+			}
+			else
 			{
 				player_boards[turn].DeleteNewPatch();
 				patches.PutOne();
 			}
 			this.PanelPatches.Invalidate();
 			player_panels[turn].Invalidate();
+			CheckButtonOk();
+			this.ButtonOk.Invalidate();
 		}
 
 		private void PanelPlayer_MouseDown(object sender, MouseEventArgs e)
@@ -122,23 +125,28 @@ namespace patchwork
 			}
 		}
 
+		private void FixPatch()
+		{
+			int taken_patch_time = player_boards[turn].GetNewPatchTime();
+			if (player_boards[turn].FixPatch())
+			{
+				patches.MarkTakenPatch();
+				player_boards[turn].PutPatch();
+				TimeChange time_change = time_board.SetTime(turn, player_boards[turn].GetTime() + taken_patch_time);
+				player_boards[turn].SpendTime(time_change);
+				this.PanelPatches.Invalidate();
+				InvalidateTableLayoutPanelMain();
+				GiveTurnToNextPlayer();
+			}
+		}
+
 		private void PanelPlayer_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			if ((sender as Panel) == player_panels[turn])
 			{
 				if (player_boards[turn].IsClickOnNewPatch(new Point(e.X, e.Y)))
 				{
-					int taken_patch_time = player_boards[turn].GetNewPatchTime();
-					if (player_boards[turn].FixPatch(new Point(e.X, e.Y)))
-					{
-						patches.MarkTakenPatch();
-						player_boards[turn].PutPatch();
-						TimeChange time_change = time_board.SetTime(turn, player_boards[turn].GetTime() + taken_patch_time);
-						player_boards[turn].SpendTime(time_change);
-						this.PanelPatches.Invalidate();
-						InvalidateTableLayoutPanelMain();
-						GiveTurnToNextPlayer();
-					}
+					FixPatch();
 				}
 			}
 		}
@@ -156,6 +164,8 @@ namespace patchwork
 			this.PanelOpponentIncome.Invalidate();
 
 			this.PanelBoard.Invalidate();
+			CheckButtonOk();
+			this.ButtonOk.Invalidate();
 		}
 
 		private void GiveTurnToNextPlayer()
@@ -188,7 +198,7 @@ namespace patchwork
 			time_board.Paint(e);
 		}
 
-		private void PanelBoard_MouseDoubleClick(object sender, MouseEventArgs e)
+		private void MoveFurther()
 		{
 			TimeChange time_change = time_board.MoveForward(turn);
 			player_boards[turn].SpendTime(time_change, true);
@@ -197,6 +207,51 @@ namespace patchwork
 			GiveTurnToNextPlayer();
 			InvalidateTableLayoutPanelMain();
 			this.PanelPatches.Invalidate();
+		}
+
+		private void PanelBoard_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			MoveFurther();
+		}
+
+		private void PanelBoardPrize_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+
+		private void ButtonOk_Click(object sender, EventArgs e)
+		{
+			FixPatch();
+		}
+
+		private void ButtonTime_Click(object sender, EventArgs e)
+		{
+			MoveFurther();
+		}
+
+		private void CheckButtonOk()
+		{
+			if (player_boards[turn].CheckPatch())
+			{
+				this.ButtonOk.Enabled = true;
+				this.ButtonOk.Focus();
+			}
+			else
+			{
+				this.ButtonOk.Enabled = false;
+			}
+		}
+
+		private void ButtonOk_Paint(object sender, PaintEventArgs e)
+		{
+			//if (player_boards[turn].CheckPatch())
+			//{
+			//	this.ButtonOk.Enabled = true;
+			//}
+			//else
+			//{
+			//	this.ButtonOk.Enabled = false;
+			//}
 		}
 	}
 }

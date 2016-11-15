@@ -51,6 +51,8 @@
 			this.PanelOpponentPoints = new System.Windows.Forms.Panel();
 			this.PanelOpponentPrize = new System.Windows.Forms.Panel();
 			this.PanelOpponentIncome = new System.Windows.Forms.Panel();
+			this.ButtonOk = new System.Windows.Forms.Button();
+			this.ButtonTime = new System.Windows.Forms.Button();
 			this.MenuMain.SuspendLayout();
 			this.TableLayoutPanelMain.SuspendLayout();
 			this.TableLayoutPanelPlayer.SuspendLayout();
@@ -255,6 +257,8 @@
 			this.TableLayoutPanelBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.TableLayoutPanelBoard.Controls.Add(this.PanelBoard, 0, 0);
 			this.TableLayoutPanelBoard.Controls.Add(this.PanelBoardPrize, 1, 1);
+			this.TableLayoutPanelBoard.Controls.Add(this.ButtonOk, 0, 1);
+			this.TableLayoutPanelBoard.Controls.Add(this.ButtonTime, 2, 1);
 			this.TableLayoutPanelBoard.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TableLayoutPanelBoard.Location = new System.Drawing.Point(230, 129);
 			this.TableLayoutPanelBoard.Name = "TableLayoutPanelBoard";
@@ -273,6 +277,7 @@
 			this.PanelBoardPrize.Name = "PanelBoardPrize";
 			this.PanelBoardPrize.Size = new System.Drawing.Size(68, 25);
 			this.PanelBoardPrize.TabIndex = 3;
+			this.PanelBoardPrize.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelBoardPrize_Paint);
 			// 
 			// TableLayoutPanelOpponent
 			// 
@@ -325,6 +330,35 @@
 			this.PanelOpponentIncome.TabIndex = 5;
 			this.PanelOpponentIncome.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponentIncome_Paint);
 			// 
+			// ButtonOk
+			// 
+			this.ButtonOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.ButtonOk.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ButtonOk.Enabled = false;
+			this.ButtonOk.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.ButtonOk.ForeColor = System.Drawing.Color.Black;
+			this.ButtonOk.Location = new System.Drawing.Point(3, 202);
+			this.ButtonOk.Name = "ButtonOk";
+			this.ButtonOk.Size = new System.Drawing.Size(68, 25);
+			this.ButtonOk.TabIndex = 6;
+			this.ButtonOk.Text = "Ok";
+			this.ButtonOk.UseVisualStyleBackColor = false;
+			this.ButtonOk.Click += new System.EventHandler(this.ButtonOk_Click);
+			this.ButtonOk.Paint += new System.Windows.Forms.PaintEventHandler(this.ButtonOk_Paint);
+			// 
+			// ButtonTime
+			// 
+			this.ButtonTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.ButtonTime.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.ButtonTime.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.ButtonTime.Location = new System.Drawing.Point(151, 202);
+			this.ButtonTime.Name = "ButtonTime";
+			this.ButtonTime.Size = new System.Drawing.Size(68, 25);
+			this.ButtonTime.TabIndex = 7;
+			this.ButtonTime.Text = "Move";
+			this.ButtonTime.UseVisualStyleBackColor = false;
+			this.ButtonTime.Click += new System.EventHandler(this.ButtonTime_Click);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,6 +408,8 @@
         private System.Windows.Forms.Panel PanelOpponentPrize;
         private System.Windows.Forms.Panel PanelOpponentIncome;
         private System.Windows.Forms.Panel PanelBoardPrize;
+		private System.Windows.Forms.Button ButtonOk;
+		private System.Windows.Forms.Button ButtonTime;
 	}
 }
 
