@@ -16,6 +16,7 @@ namespace patchwork
 		public static Brush PatchPriceBrush = Brushes.Black;
 		public static Brush PatchTimeBrush = Brushes.Brown;
 		public static Brush PatchIncomeBrush = Brushes.Blue;
+		public static Brush PatchInactiveBrush = Brushes.Gray;
 		public static Brush PlayerTokenBrush = Brushes.GreenYellow;
 		public static Brush OpponentTokenBrush = Brushes.Pink;
 		public static Brush TimeBoardBrush = Brushes.Coral;
@@ -33,11 +34,12 @@ namespace patchwork
 		TableLayoutPanel table_layout_panel_main;
 		Graphics graphics;
 		Bitmap POLE;
-		//List<Patch> patches;
 		Patch[] patches;
 		int taken_patch_index = NOT_TAKEN;
 		Bitmap taken_patch_pole;
 		Point mouse_position = new Point(0, 0);
+
+		int active_player_points;
 
 		int margin = 5,
 			squares_number_height = 5;
@@ -122,6 +124,11 @@ namespace patchwork
 			margin_height = (panel_height - board_height) / 2 + margin;
 		}
 
+		public void SetInfoAboutActivePlayer(int active_player_points_)
+		{
+			active_player_points = active_player_points_;
+		}
+
 		public void Paint(PaintEventArgs e)
 		{
 			CountDrawingInfo();
@@ -186,9 +193,14 @@ namespace patchwork
 
 			Brush patch_brush = null;
 			bool border = false;
+
+			if ((patch_index >= 3) || (active_player_points < patch.GetPrice()))
+			{
+				patch_brush = Constants.PatchInactiveBrush;
+			}
+
 			if (taken_patch_index == patch_index)
 			{
-				//patch_brush = PatchBrushes.NewPatchBrush;
 				border = true;
 			}
 
@@ -215,31 +227,31 @@ namespace patchwork
 			return prev_squares_in_width;
 		}
 
-		public int FindMaxIndexOfAvaliablePatch()
-		{
-			int found_number = 0;
-			for (int patch_index = 0; patch_index < patches.Length; patch_index++)
-			{
-				Patch patch = patches[patch_index];
-				if (!patch.IsTaken())
-				{
-					found_number++;
-					if (found_number == 3)
-					{
-						return patch_index;
-					}
-				}
-			}
-			//index последнего доступного
-			return patches.Length - 1;
-		}
+		//public int FindMaxIndexOfAvaliablePatch()
+		//{
+		//	int found_number = 0;
+		//	for (int patch_index = 0; patch_index < patches.Length; patch_index++)
+		//	{
+		//		Patch patch = patches[patch_index];
+		//		if (!patch.IsTaken())
+		//		{
+		//			found_number++;
+		//			if (found_number == 3)
+		//			{
+		//				return patch_index;
+		//			}
+		//		}
+		//	}
+		//	//index последнего доступного
+		//	return patches.Length - 1;
+		//}
 
 		public Patch TakeOne(int x, int y)
 		{
 			int prev_squares_in_width = 0;
 
-			int max_patch_index = FindMaxIndexOfAvaliablePatch();
-			for (int patch_index = 0; patch_index <= max_patch_index; patch_index++)
+			int max_patch_index = 3; //FindMaxIndexOfAvaliablePatch();
+			for (int patch_index = 0; patch_index < max_patch_index; patch_index++)
 			{
 				Patch patch = patches[patch_index];
 				if (!patch.IsTaken())

@@ -29,8 +29,6 @@ namespace patchwork
         {
             InitializeComponent();
 
-			patches = new Patches(this.PanelPatches, this.TableLayoutPanelMain);
-
 			player_panels[Turn.PLAYER] = this.PanelPlayer;
 			player_panels[Turn.OPPONENT] = this.PanelOpponent;
 			turn = Turn.PLAYER;
@@ -41,12 +39,10 @@ namespace patchwork
 			opponent_board = new PlayerBoard(this.TableLayoutPanelOpponent);
 			player_boards[Turn.OPPONENT] = opponent_board;
 
+			patches = new Patches(this.PanelPatches, this.TableLayoutPanelMain);
+
 			time_board = new TimeBoard(this.TableLayoutPanelBoard);
 		}
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-        }
 
         private void FormMain_Paint(object sender, PaintEventArgs e)
         {
@@ -78,6 +74,7 @@ namespace patchwork
 
         private void PanelPatches_Paint(object sender, PaintEventArgs e)
         {
+			patches.SetInfoAboutActivePlayer(player_boards[turn].GetPoints());
 			patches.Paint(e);
 		}
 
