@@ -94,7 +94,7 @@ namespace patchwork
 			this.PanelPatches.Invalidate();
 			player_panels[turn].Invalidate();
 			CheckButtonOk();
-			this.ButtonOk.Invalidate();
+			this.PanelButtonOk.Invalidate();
 		}
 
 		private void PanelPlayer_MouseDown(object sender, MouseEventArgs e)
@@ -165,7 +165,7 @@ namespace patchwork
 
 			this.PanelBoard.Invalidate();
 			CheckButtonOk();
-			this.ButtonOk.Invalidate();
+			this.PanelButtonOk.Invalidate();
 		}
 
 		private void GiveTurnToNextPlayer()
@@ -219,39 +219,56 @@ namespace patchwork
 
 		}
 
-		private void ButtonOk_Click(object sender, EventArgs e)
-		{
-			FixPatch();
-		}
-
-		private void ButtonTime_Click(object sender, EventArgs e)
-		{
-			MoveFurther();
-		}
-
 		private void CheckButtonOk()
 		{
 			if (player_boards[turn].CheckPatch())
 			{
-				this.ButtonOk.Enabled = true;
-				this.ButtonOk.Focus();
+				this.PanelButtonOk.Enabled = true;
 			}
 			else
 			{
-				this.ButtonOk.Enabled = false;
+				this.PanelButtonOk.Enabled = false;
 			}
 		}
 
-		private void ButtonOk_Paint(object sender, PaintEventArgs e)
+		private void PanelButtonOk_Paint(object sender, PaintEventArgs e)
 		{
-			//if (player_boards[turn].CheckPatch())
-			//{
-			//	this.ButtonOk.Enabled = true;
-			//}
-			//else
-			//{
-			//	this.ButtonOk.Enabled = false;
-			//}
+			int panel_width = this.PanelButtonOk.Width,
+				panel_height = this.PanelButtonOk.Height;
+			Bitmap pole = new Bitmap(panel_width, panel_height);
+			Graphics graphics = Graphics.FromImage(pole);
+			graphics.DrawString("Ok",
+					new Font(Constants.MainFont, panel_height * 6 / 11),
+					Constants.ButtonBrush,
+					new Point(0, 0));
+			e.Graphics.DrawImage(pole,
+				0,
+				0);
+		}
+
+		private void PanelButtonOk_Click(object sender, EventArgs e)
+		{
+			FixPatch();
+		}
+
+		private void PanelButtonTime_Paint(object sender, PaintEventArgs e)
+		{
+			int panel_width = this.PanelButtonOk.Width,
+				panel_height = this.PanelButtonOk.Height;
+			Bitmap pole = new Bitmap(panel_width, panel_height);
+			Graphics graphics = Graphics.FromImage(pole);
+			graphics.DrawString("Move",
+					new Font(Constants.MainFont, panel_height * 6 / 11),
+					Constants.ButtonBrush,
+					new Point(0, 0));
+			e.Graphics.DrawImage(pole,
+				0,
+				0);
+		}
+
+		private void PanelButtonTime_Click(object sender, EventArgs e)
+		{
+			MoveFurther();
 		}
 	}
 }
