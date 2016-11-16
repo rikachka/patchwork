@@ -131,7 +131,6 @@ namespace patchwork
 			{
 				if (player_boards[turn].CheckPrizeReceivingCondition())
 				{
-					//this.PictureBoxPlayerPrize.Show();
 					this.PictureBoxPrize.Hide();
 				}
 			}

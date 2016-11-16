@@ -375,11 +375,12 @@ namespace patchwork
 				for (int topleft_square_j = 0; topleft_square_j < occupied_squares.GetLength(1) - prize_squares_number; topleft_square_j++)
 				{
 					bool is_squares_number_occupied = true;
-					for (int i = 0; i < prize_squares_number; i++)
+
+					for (int square_index_i = 0; square_index_i < prize_squares_number; square_index_i++)
 					{
-						for (int j = 0; j < prize_squares_number; j++)
+						for (int square_index_j = 0; square_index_j < prize_squares_number; square_index_j++)
 						{
-							if (!occupied_squares[topleft_square_i + i, topleft_square_j + j])
+							if (!occupied_squares[topleft_square_i + square_index_i, topleft_square_j + square_index_j])
 							{
 								is_squares_number_occupied = false;
 								break;
@@ -390,6 +391,7 @@ namespace patchwork
 							break;
 						}
 					}
+
 					if (is_squares_number_occupied)
 					{
 						picturebox_prize.Show();
