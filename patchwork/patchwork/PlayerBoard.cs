@@ -45,6 +45,7 @@ namespace patchwork
             panel_prize = (Panel)panel_player.GetControlFromPosition(1, 1);
             panel_income = (Panel)panel_player.GetControlFromPosition(2, 1);
 			picturebox_prize = (PictureBox)panel_prize.Controls[0];
+			picturebox_prize.Hide();
 			points = 7;
 			time = 0;
 			income = 0;

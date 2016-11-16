@@ -29,6 +29,11 @@ namespace patchwork
         {
             InitializeComponent();
 
+			StartNewGame();
+		}
+
+		private void StartNewGame()
+		{
 			player_panels[Turn.PLAYER] = this.PanelPlayer;
 			player_panels[Turn.OPPONENT] = this.PanelOpponent;
 			turn = Turn.PLAYER;
@@ -42,6 +47,10 @@ namespace patchwork
 			patches = new Patches(this.PanelPatches, this.TableLayoutPanelMain);
 
 			time_board = new TimeBoard(this.TableLayoutPanelBoard);
+
+			this.PictureBoxPrize.Show();
+
+			this.Invalidate();
 		}
 
         private void FormMain_Paint(object sender, PaintEventArgs e)
@@ -281,6 +290,11 @@ namespace patchwork
 		private void PanelButtonTime_Click(object sender, EventArgs e)
 		{
 			MoveFurther();
+		}
+
+		private void MenuItemGameNew_Click(object sender, EventArgs e)
+		{
+			StartNewGame();
 		}
 	}
 }

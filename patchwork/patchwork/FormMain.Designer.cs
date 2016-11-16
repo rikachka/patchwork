@@ -93,8 +93,9 @@
 			// MenuItemGameNew
 			// 
 			this.MenuItemGameNew.Name = "MenuItemGameNew";
-			this.MenuItemGameNew.Size = new System.Drawing.Size(98, 22);
+			this.MenuItemGameNew.Size = new System.Drawing.Size(152, 22);
 			this.MenuItemGameNew.Text = "New";
+			this.MenuItemGameNew.Click += new System.EventHandler(this.MenuItemGameNew_Click);
 			// 
 			// MenuItemGameSave
 			// 
