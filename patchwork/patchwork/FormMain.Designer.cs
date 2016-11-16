@@ -106,8 +106,9 @@
 			// MenuItemGameExit
 			// 
 			this.MenuItemGameExit.Name = "MenuItemGameExit";
-			this.MenuItemGameExit.Size = new System.Drawing.Size(98, 22);
+			this.MenuItemGameExit.Size = new System.Drawing.Size(152, 22);
 			this.MenuItemGameExit.Text = "Exit";
+			this.MenuItemGameExit.Click += new System.EventHandler(this.MenuItemGameExit_Click);
 			// 
 			// MenuItemInfo
 			// 

@@ -296,5 +296,10 @@ namespace patchwork
 		{
 			StartNewGame();
 		}
+
+		private void MenuItemGameExit_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 	}
 }
