@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
 			this.MenuMain = new System.Windows.Forms.MenuStrip();
 			this.MenuItemGame = new System.Windows.Forms.ToolStripMenuItem();
 			this.MenuItemGameNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,11 +54,14 @@
 			this.PanelOpponentIncome = new System.Windows.Forms.Panel();
 			this.PanelButtonOk = new System.Windows.Forms.Panel();
 			this.PanelButtonTime = new System.Windows.Forms.Panel();
+			this.PictureBoxPrize = new System.Windows.Forms.PictureBox();
 			this.MenuMain.SuspendLayout();
 			this.TableLayoutPanelMain.SuspendLayout();
 			this.TableLayoutPanelPlayer.SuspendLayout();
 			this.TableLayoutPanelBoard.SuspendLayout();
+			this.PanelBoardPrize.SuspendLayout();
 			this.TableLayoutPanelOpponent.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// MenuMain
@@ -272,9 +276,11 @@
 			// 
 			this.PanelBoardPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 			this.PanelBoardPrize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.PanelBoardPrize.Controls.Add(this.PictureBoxPrize);
 			this.PanelBoardPrize.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PanelBoardPrize.Location = new System.Drawing.Point(77, 202);
 			this.PanelBoardPrize.Name = "PanelBoardPrize";
+			this.PanelBoardPrize.Padding = new System.Windows.Forms.Padding(3);
 			this.PanelBoardPrize.Size = new System.Drawing.Size(68, 25);
 			this.PanelBoardPrize.TabIndex = 3;
 			this.PanelBoardPrize.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelBoardPrize_Paint);
@@ -356,6 +362,20 @@
 			this.PanelButtonTime.Click += new System.EventHandler(this.PanelButtonTime_Click);
 			this.PanelButtonTime.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelButtonTime_Paint);
 			// 
+			// PictureBoxPrize
+			// 
+			this.PictureBoxPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.PictureBoxPrize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxPrize.BackgroundImage")));
+			this.PictureBoxPrize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.PictureBoxPrize.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PictureBoxPrize.ErrorImage = null;
+			this.PictureBoxPrize.InitialImage = null;
+			this.PictureBoxPrize.Location = new System.Drawing.Point(3, 3);
+			this.PictureBoxPrize.Name = "PictureBoxPrize";
+			this.PictureBoxPrize.Size = new System.Drawing.Size(60, 17);
+			this.PictureBoxPrize.TabIndex = 0;
+			this.PictureBoxPrize.TabStop = false;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -374,7 +394,9 @@
 			this.TableLayoutPanelMain.ResumeLayout(false);
 			this.TableLayoutPanelPlayer.ResumeLayout(false);
 			this.TableLayoutPanelBoard.ResumeLayout(false);
+			this.PanelBoardPrize.ResumeLayout(false);
 			this.TableLayoutPanelOpponent.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -407,6 +429,7 @@
         private System.Windows.Forms.Panel PanelBoardPrize;
 		private System.Windows.Forms.Panel PanelButtonOk;
 		private System.Windows.Forms.Panel PanelButtonTime;
+		private System.Windows.Forms.PictureBox PictureBoxPrize;
 	}
 }
 
