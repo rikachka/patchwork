@@ -55,13 +55,19 @@
 			this.PanelButtonOk = new System.Windows.Forms.Panel();
 			this.PanelButtonTime = new System.Windows.Forms.Panel();
 			this.PictureBoxPrize = new System.Windows.Forms.PictureBox();
+			this.PictureBoxPlayerPrize = new System.Windows.Forms.PictureBox();
+			this.PictureBoxOpponentPrize = new System.Windows.Forms.PictureBox();
 			this.MenuMain.SuspendLayout();
 			this.TableLayoutPanelMain.SuspendLayout();
 			this.TableLayoutPanelPlayer.SuspendLayout();
+			this.PanelPlayerPrize.SuspendLayout();
 			this.TableLayoutPanelBoard.SuspendLayout();
 			this.PanelBoardPrize.SuspendLayout();
 			this.TableLayoutPanelOpponent.SuspendLayout();
+			this.PanelOpponentPrize.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPlayerPrize)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxOpponentPrize)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// MenuMain
@@ -236,9 +242,11 @@
 			// 
 			this.PanelPlayerPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
 			this.PanelPlayerPrize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.PanelPlayerPrize.Controls.Add(this.PictureBoxPlayerPrize);
 			this.PanelPlayerPrize.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PanelPlayerPrize.Location = new System.Drawing.Point(76, 202);
 			this.PanelPlayerPrize.Name = "PanelPlayerPrize";
+			this.PanelPlayerPrize.Padding = new System.Windows.Forms.Padding(3);
 			this.PanelPlayerPrize.Size = new System.Drawing.Size(67, 25);
 			this.PanelPlayerPrize.TabIndex = 3;
 			// 
@@ -319,9 +327,11 @@
 			// 
 			this.PanelOpponentPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
 			this.PanelOpponentPrize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.PanelOpponentPrize.Controls.Add(this.PictureBoxOpponentPrize);
 			this.PanelOpponentPrize.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.PanelOpponentPrize.Location = new System.Drawing.Point(77, 202);
 			this.PanelOpponentPrize.Name = "PanelOpponentPrize";
+			this.PanelOpponentPrize.Padding = new System.Windows.Forms.Padding(3);
 			this.PanelOpponentPrize.Size = new System.Drawing.Size(68, 25);
 			this.PanelOpponentPrize.TabIndex = 4;
 			// 
@@ -376,6 +386,36 @@
 			this.PictureBoxPrize.TabIndex = 0;
 			this.PictureBoxPrize.TabStop = false;
 			// 
+			// PictureBoxPlayerPrize
+			// 
+			this.PictureBoxPlayerPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+			this.PictureBoxPlayerPrize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxPlayerPrize.BackgroundImage")));
+			this.PictureBoxPlayerPrize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.PictureBoxPlayerPrize.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PictureBoxPlayerPrize.ErrorImage = null;
+			this.PictureBoxPlayerPrize.InitialImage = null;
+			this.PictureBoxPlayerPrize.Location = new System.Drawing.Point(3, 3);
+			this.PictureBoxPlayerPrize.Name = "PictureBoxPlayerPrize";
+			this.PictureBoxPlayerPrize.Size = new System.Drawing.Size(59, 17);
+			this.PictureBoxPlayerPrize.TabIndex = 1;
+			this.PictureBoxPlayerPrize.TabStop = false;
+			this.PictureBoxPlayerPrize.Visible = false;
+			// 
+			// PictureBoxOpponentPrize
+			// 
+			this.PictureBoxOpponentPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+			this.PictureBoxOpponentPrize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxOpponentPrize.BackgroundImage")));
+			this.PictureBoxOpponentPrize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.PictureBoxOpponentPrize.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PictureBoxOpponentPrize.ErrorImage = null;
+			this.PictureBoxOpponentPrize.InitialImage = null;
+			this.PictureBoxOpponentPrize.Location = new System.Drawing.Point(3, 3);
+			this.PictureBoxOpponentPrize.Name = "PictureBoxOpponentPrize";
+			this.PictureBoxOpponentPrize.Size = new System.Drawing.Size(60, 17);
+			this.PictureBoxOpponentPrize.TabIndex = 1;
+			this.PictureBoxOpponentPrize.TabStop = false;
+			this.PictureBoxOpponentPrize.Visible = false;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -393,10 +433,14 @@
 			this.MenuMain.PerformLayout();
 			this.TableLayoutPanelMain.ResumeLayout(false);
 			this.TableLayoutPanelPlayer.ResumeLayout(false);
+			this.PanelPlayerPrize.ResumeLayout(false);
 			this.TableLayoutPanelBoard.ResumeLayout(false);
 			this.PanelBoardPrize.ResumeLayout(false);
 			this.TableLayoutPanelOpponent.ResumeLayout(false);
+			this.PanelOpponentPrize.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPlayerPrize)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxOpponentPrize)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -430,6 +474,8 @@
 		private System.Windows.Forms.Panel PanelButtonOk;
 		private System.Windows.Forms.Panel PanelButtonTime;
 		private System.Windows.Forms.PictureBox PictureBoxPrize;
+		private System.Windows.Forms.PictureBox PictureBoxPlayerPrize;
+		private System.Windows.Forms.PictureBox PictureBoxOpponentPrize;
 	}
 }
 

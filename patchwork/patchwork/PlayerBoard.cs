@@ -15,6 +15,7 @@ namespace patchwork
         Panel panel_points;
         Panel panel_prize;
         Panel panel_income;
+		PictureBox picturebox_prize;
 
         Graphics c;
         Bitmap POLE;
@@ -25,6 +26,8 @@ namespace patchwork
 			board_length,
 			square_length,
 			margin_width, margin_height;
+
+		int prize_squares_number = 7;
 		
 		bool has_new_patch = false;
 		bool is_patch_taken = false;
@@ -41,6 +44,7 @@ namespace patchwork
             panel_points = (Panel)panel_player.GetControlFromPosition(0, 1);
             panel_prize = (Panel)panel_player.GetControlFromPosition(1, 1);
             panel_income = (Panel)panel_player.GetControlFromPosition(2, 1);
+			picturebox_prize = (PictureBox)panel_prize.Controls[0];
 			points = 7;
 			time = 0;
 			income = 0;
@@ -179,7 +183,7 @@ namespace patchwork
 			}
 		}
 
-		public bool IsPatchesIntersection()
+		public bool[,] GetOccupiedSquares()
 		{
 			bool[,] occupied_squares = new bool[squares_number, squares_number];
 			for (int i = 0; i < occupied_squares.GetLength(0); i++)
@@ -203,6 +207,12 @@ namespace patchwork
 					}
 				}
 			}
+			return occupied_squares;
+		}
+
+		public bool IsPatchesIntersection()
+		{
+			bool[,] occupied_squares = GetOccupiedSquares();
 			for (int i = 0; i < new_patch.GetHeight(); i++)
 			{
 				for (int j = 0; j < new_patch.GetWidth(); j++)
@@ -354,6 +364,41 @@ namespace patchwork
 			e.Graphics.DrawImage(pole,
 				0,
 				0);
+		}
+
+		public bool CheckPrizeReceivingCondition()
+		{
+			bool[,] occupied_squares = GetOccupiedSquares();
+
+			for (int topleft_square_i = 0; topleft_square_i < occupied_squares.GetLength(0) - prize_squares_number; topleft_square_i++)
+			{
+				for (int topleft_square_j = 0; topleft_square_j < occupied_squares.GetLength(1) - prize_squares_number; topleft_square_j++)
+				{
+					bool is_squares_number_occupied = true;
+					for (int i = 0; i < prize_squares_number; i++)
+					{
+						for (int j = 0; j < prize_squares_number; j++)
+						{
+							if (!occupied_squares[topleft_square_i + i, topleft_square_j + j])
+							{
+								is_squares_number_occupied = false;
+								break;
+							}
+						}
+						if (!is_squares_number_occupied)
+						{
+							break;
+						}
+					}
+					if (is_squares_number_occupied)
+					{
+						picturebox_prize.Show();
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 	}
 }

@@ -125,6 +125,18 @@ namespace patchwork
 			}
 		}
 
+		private void CheckPrizeReceiving()
+		{
+			if (this.PictureBoxPrize.Visible)
+			{
+				if (player_boards[turn].CheckPrizeReceivingCondition())
+				{
+					//this.PictureBoxPlayerPrize.Show();
+					this.PictureBoxPrize.Hide();
+				}
+			}
+		}
+
 		private void FixPatch()
 		{
 			int taken_patch_time = player_boards[turn].GetNewPatchTime();
@@ -134,6 +146,7 @@ namespace patchwork
 				player_boards[turn].PutPatch();
 				TimeChange time_change = time_board.SetTime(turn, player_boards[turn].GetTime() + taken_patch_time);
 				player_boards[turn].SpendTime(time_change);
+				CheckPrizeReceiving();
 				this.PanelPatches.Invalidate();
 				InvalidateTableLayoutPanelMain();
 				GiveTurnToNextPlayer();
