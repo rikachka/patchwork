@@ -91,7 +91,7 @@ namespace patchwork
         {
 			patches.PutOne();
 			Patch patch = patches.TakeOne(e.X, e.Y);
-			if (patches.IsPatchTaken() && player_boards[turn].HasEnoughMoney(patch))
+			if (patches.IsPatchTaken() && player_boards[turn].HasEnoughMoney(patch) && !player_boards[turn].IsGameEnd())
 			{
 				player_boards[turn].AddNewPatch(patch);
 			}
@@ -191,7 +191,15 @@ namespace patchwork
 
 		private void GiveTurnToNextPlayer()
 		{
-			turn = time_board.GetNextPlayer(turn);
+			if (time_board.IsGameEnd())
+			{
+				player_board.SetGameEnd();
+				opponent_board.SetGameEnd();
+			}
+			else
+			{
+				turn = time_board.GetNextPlayer(turn);
+			}
 		}
 
 		private void PanelPlayerPoints_Paint(object sender, PaintEventArgs e)
@@ -225,9 +233,9 @@ namespace patchwork
 			player_boards[turn].SpendTime(time_change, true);
 			player_boards[turn].DeleteNewPatch();
 			patches.PutOne();
-			GiveTurnToNextPlayer();
 			InvalidateTableLayoutPanelMain();
 			this.PanelPatches.Invalidate();
+			GiveTurnToNextPlayer();
 		}
 
 		private void PanelBoard_MouseDoubleClick(object sender, MouseEventArgs e)

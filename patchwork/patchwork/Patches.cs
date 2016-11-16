@@ -24,6 +24,8 @@ namespace patchwork
 		public static Pen TimeSpotBordersPen = new Pen(Color.Black, 1);
 		public static Brush TimeBoardPatchBrush = Brushes.Brown;
 		public static Brush ButtonBrush = Brushes.Black;
+		public static Brush InactiveBrush = new SolidBrush(Color.FromArgb(170, 120, 120, 120));
+		public static Brush ScoreBrush = Brushes.Coral;
 		public static string PatchFont = "Arial";
 		public static string MainFont = "Arial";
 	}

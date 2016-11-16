@@ -376,5 +376,10 @@ namespace patchwork
 				return other_player;
 			}
 		}
+
+		public bool IsGameEnd()
+		{
+			return (times[Turn.PLAYER] >= time_spots_number - 1 && times[Turn.OPPONENT] >= time_spots_number - 1);
+		}
 	}
 }

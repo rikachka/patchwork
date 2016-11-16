@@ -37,6 +37,8 @@ namespace patchwork
 
 		int points, time, income;
 
+		bool is_game_end = false;
+
 		public PlayerBoard(TableLayoutPanel panel_player_)
         {
             panel_player = panel_player_;
@@ -96,7 +98,43 @@ namespace patchwork
 			{
 				PaintPatch(e, new_patch, Constants.NewPatchBrush, true);
 			}
-        }
+
+			if (IsGameEnd())
+			{
+				PaintScore(e);
+			}
+		}
+
+		private int CountScore()
+		{
+			int score = points;
+			if (picturebox_prize.Visible)
+			{
+				score += 7;
+			}
+			score -= GetUnoccupiedSquaresNumber() * 2;
+			return score;
+		}
+
+		public void PaintScore(PaintEventArgs e)
+		{
+			POLE = new Bitmap(panel_board.Width, panel_board.Height);
+			c = Graphics.FromImage(POLE);
+			c.FillRectangle(Constants.InactiveBrush, margin_width, margin_height, board_length + 1, board_length + 1);
+			e.Graphics.DrawImage(POLE, 0, 0);
+
+			int score = CountScore();
+			
+			Bitmap pole = new Bitmap(panel_width, panel_height);
+			Graphics graphics = Graphics.FromImage(pole);
+			graphics.DrawString(score.ToString(),
+					new Font(Constants.PatchFont, panel_height / 4),
+					Constants.ScoreBrush,
+					new Point(margin_width, margin_height));
+			e.Graphics.DrawImage(pole,
+				0,
+				0);
+		}
 
 		public void PaintPatch(PaintEventArgs e, Patch patch, Brush brush, bool border = false)
 		{
@@ -184,7 +222,7 @@ namespace patchwork
 			}
 		}
 
-		public bool[,] GetOccupiedSquares()
+		private bool[,] GetOccupiedSquares()
 		{
 			bool[,] occupied_squares = new bool[squares_number, squares_number];
 			for (int i = 0; i < occupied_squares.GetLength(0); i++)
@@ -209,6 +247,23 @@ namespace patchwork
 				}
 			}
 			return occupied_squares;
+		}
+
+		private int GetUnoccupiedSquaresNumber()
+		{
+			bool[,] occupied_squares = GetOccupiedSquares();
+			int unoccupied_squares_number = 0;
+			for (int i = 0; i < occupied_squares.GetLength(0); i++)
+			{
+				for (int j = 0; j < occupied_squares.GetLength(1); j++)
+				{
+					if (!occupied_squares[i, j])
+					{
+						unoccupied_squares_number++;
+					}
+				}
+			}
+			return unoccupied_squares_number;
 		}
 
 		public bool IsPatchesIntersection()
@@ -402,6 +457,16 @@ namespace patchwork
 			}
 
 			return false;
+		}
+
+		public void SetGameEnd()
+		{
+			is_game_end = true;
+		}
+	
+		public bool IsGameEnd()
+		{
+			return is_game_end;
 		}
 	}
 }
