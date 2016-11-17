@@ -49,7 +49,7 @@ namespace patchwork
 			picturebox_prize = (PictureBox)panel_prize.Controls[0];
 			picturebox_prize.Hide();
 			points = 7;
-			time = 0;
+			time = 19;
 			income = 0;
         }
 
@@ -163,7 +163,8 @@ namespace patchwork
 				0,
 				0,
 				square_length);
-			} else
+			}
+			else
 			{
 				patch.Paint(patch_graphics, brush,
 				0,
@@ -417,9 +418,7 @@ namespace patchwork
 					new Font(Constants.PatchFont, panel_height * 6 / 11),
 					Constants.PatchPriceBrush,
 					new Point(0, 0));
-			e.Graphics.DrawImage(pole,
-				0,
-				0);
+			e.Graphics.DrawImage(pole, 0, 0);
 		}
 
 		public void PaintIncome(PaintEventArgs e)
@@ -432,9 +431,7 @@ namespace patchwork
 					new Font(Constants.PatchFont, panel_height * 6 / 11),
 					Constants.PatchIncomeBrush,
 					new Point(0, 0));
-			e.Graphics.DrawImage(pole,
-				0,
-				0);
+			e.Graphics.DrawImage(pole, 0, 0);
 		}
 
 		public bool CheckPrizeReceivingCondition()

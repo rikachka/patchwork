@@ -17,6 +17,7 @@ namespace patchwork
 		public static Brush PatchTimeBrush = Brushes.Brown;
 		public static Brush PatchIncomeBrush = Brushes.Blue;
 		public static Brush PatchInactiveBrush = Brushes.Gray;
+		public static Brush OnePatchBrush = Brushes.Brown;
 		public static Brush PlayerTokenBrush = Brushes.GreenYellow;
 		public static Brush OpponentTokenBrush = Brushes.Pink;
 		public static Brush TimeBoardBrush = Brushes.Coral;
@@ -34,6 +35,7 @@ namespace patchwork
 	class Patches
 	{
 		const int NOT_TAKEN = -1;
+		const int AVAILABLE_PATCHES_NUMBER = 50;
 
 		Panel panel_patches;
 		TableLayoutPanel table_layout_panel_main;
@@ -199,7 +201,7 @@ namespace patchwork
 			Brush patch_brush = null;
 			bool border = false;
 
-			if ((patch_index >= 3) || (active_player_points < patch.GetPrice()))
+			if ((patch_index >= AVAILABLE_PATCHES_NUMBER) || (active_player_points < patch.GetPrice()))
 			{
 				patch_brush = Constants.PatchInactiveBrush;
 			}
@@ -236,7 +238,7 @@ namespace patchwork
 		{
 			int prev_squares_in_width = 0;
 
-			int max_patch_index = 3; 
+			int max_patch_index = Math.Min(AVAILABLE_PATCHES_NUMBER, patches.Length); 
 			for (int patch_index = 0; patch_index < max_patch_index; patch_index++)
 			{
 				Patch patch = patches[patch_index];

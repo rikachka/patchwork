@@ -77,8 +77,8 @@ namespace patchwork
 			panel_whole = panel_whole_;
 			panel_board = (Panel)panel_whole.GetControlFromPosition(0, 0);
 			panel_prize = (Panel)panel_whole.GetControlFromPosition(1, 1);
-			times[Turn.PLAYER] = 0;
-			times[Turn.OPPONENT] = 0;
+			times[Turn.PLAYER] = 19;
+			times[Turn.OPPONENT] = 19;
 
 			CreateTimeSpots();
 		}
@@ -345,6 +345,7 @@ namespace patchwork
 			{
 				if (i < time_spots_number && time_spots[i].patch)
 				{
+					time_spots[i].patch = false;
 					patches++;
 				}
 			}

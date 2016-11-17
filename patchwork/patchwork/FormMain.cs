@@ -147,6 +147,24 @@ namespace patchwork
 			}
 		}
 
+		private bool GetOnePatch(TimeChange time_change)
+		{
+			if (time_change.patch > 0)
+			{
+				Patch one_patch = new Patch();
+				player_boards[turn].AddNewPatch(one_patch);
+				PanelButtonOk.Enabled = true;
+				PanelPatches.Enabled = false;
+				PanelButtonTime.Enabled = false;
+				PanelBoard.Enabled = false;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		private void FixPatch()
 		{
 			int taken_patch_time = player_boards[turn].GetNewPatchTime();
@@ -157,9 +175,12 @@ namespace patchwork
 				TimeChange time_change = time_board.SetTime(turn, player_boards[turn].GetTime() + taken_patch_time);
 				player_boards[turn].SpendTime(time_change);
 				CheckPrizeReceiving();
+				PanelPatches.Enabled = true;
+				PanelButtonTime.Enabled = true;
+				PanelBoard.Enabled = true;
 				this.PanelPatches.Invalidate();
 				InvalidateTableLayoutPanelMain();
-				GiveTurnToNextPlayer();
+				GiveTurnToNextPlayer(time_change);
 			}
 		}
 
@@ -191,16 +212,19 @@ namespace patchwork
 			this.PanelButtonOk.Invalidate();
 		}
 
-		private void GiveTurnToNextPlayer()
+		private void GiveTurnToNextPlayer(TimeChange time_change)
 		{
-			if (time_board.IsGameEnd())
+			if (!GetOnePatch(time_change))
 			{
-				player_board.SetGameEnd();
-				opponent_board.SetGameEnd();
-			}
-			else
-			{
-				turn = time_board.GetNextPlayer(turn);
+				if (time_board.IsGameEnd())
+				{
+					player_board.SetGameEnd();
+					opponent_board.SetGameEnd();
+				}
+				else
+				{
+					turn = time_board.GetNextPlayer(turn);
+				}
 			}
 		}
 
@@ -237,7 +261,7 @@ namespace patchwork
 			patches.PutOne();
 			InvalidateTableLayoutPanelMain();
 			this.PanelPatches.Invalidate();
-			GiveTurnToNextPlayer();
+			GiveTurnToNextPlayer(time_change);
 		}
 
 		private void PanelBoard_MouseDoubleClick(object sender, MouseEventArgs e)

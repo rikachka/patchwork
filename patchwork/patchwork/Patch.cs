@@ -27,6 +27,16 @@ namespace patchwork
 			taken = false;
 		}
 
+		public Patch()
+		{
+			info = new int[,] { { 1 } };
+			price = 0;
+			time = 0;
+			income = 0;
+			taken = false;
+			brush = Constants.OnePatchBrush;
+		}
+
 		public int GetHeight()
 		{
 			return info.GetLength(0);
