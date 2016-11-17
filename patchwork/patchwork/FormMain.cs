@@ -73,12 +73,14 @@ namespace patchwork
 
         private void PanelPlayer_Paint(object sender, PaintEventArgs e)
         {
-            player_board.Paint(e);
+			bool is_active_player = (turn == Turn.PLAYER);
+            player_board.Paint(e, is_active_player);
         }
 
         private void PanelOpponent_Paint(object sender, PaintEventArgs e)
-        {
-            opponent_board.Paint(e);
+		{
+			bool is_active_player = (turn == Turn.OPPONENT);
+			opponent_board.Paint(e, is_active_player);
         }
 
         private void PanelPatches_Paint(object sender, PaintEventArgs e)

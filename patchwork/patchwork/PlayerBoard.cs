@@ -64,7 +64,7 @@ namespace patchwork
 			margin_height = (panel_height - board_length) / 2 + margin;
 		}
 
-        public void Paint(PaintEventArgs e)
+        public void Paint(PaintEventArgs e, bool is_active_player)
         {
 			CountDrawingInfo();
 
@@ -103,6 +103,23 @@ namespace patchwork
 			{
 				PaintScore(e);
 			}
+
+			if (is_active_player)
+			{
+				PaintActivePlayerBorder(e);
+			}
+		}
+
+		private void PaintActivePlayerBorder(PaintEventArgs e)
+		{
+			Bitmap pole = new Bitmap(panel_board.Width, panel_board.Height);
+			Graphics graphics = Graphics.FromImage(pole);
+			int pen_width = (int)Constants.ActivePlayerPen.Width;
+			graphics.DrawLine(Constants.ActivePlayerPen, 0, 0, 0, panel_board.Height);
+			graphics.DrawLine(Constants.ActivePlayerPen, panel_board.Width - pen_width + 1, 0, panel_board.Width - pen_width, panel_board.Height + 1);
+			graphics.DrawLine(Constants.ActivePlayerPen, 0, 0, panel_board.Width, 0);
+			graphics.DrawLine(Constants.ActivePlayerPen, 0, panel_board.Height - pen_width + 1, panel_board.Width, panel_board.Height - pen_width + 1);
+			e.Graphics.DrawImage(pole, 0, 0);
 		}
 
 		private int CountScore()
@@ -118,22 +135,20 @@ namespace patchwork
 
 		public void PaintScore(PaintEventArgs e)
 		{
-			POLE = new Bitmap(panel_board.Width, panel_board.Height);
-			c = Graphics.FromImage(POLE);
-			c.FillRectangle(Constants.InactiveBrush, margin_width, margin_height, board_length + 1, board_length + 1);
-			e.Graphics.DrawImage(POLE, 0, 0);
+			Bitmap pole = new Bitmap(panel_board.Width, panel_board.Height);
+			Graphics graphics = Graphics.FromImage(pole);
+			graphics.FillRectangle(Constants.InactiveBrush, margin_width, margin_height, board_length + 1, board_length + 1);
+			e.Graphics.DrawImage(pole, 0, 0);
 
 			int score = CountScore();
 			
-			Bitmap pole = new Bitmap(panel_width, panel_height);
-			Graphics graphics = Graphics.FromImage(pole);
+			pole = new Bitmap(panel_width, panel_height);
+			graphics = Graphics.FromImage(pole);
 			graphics.DrawString(score.ToString(),
 					new Font(Constants.PatchFont, panel_height / 4),
 					Constants.ScoreBrush,
 					new Point(margin_width, margin_height));
-			e.Graphics.DrawImage(pole,
-				0,
-				0);
+			e.Graphics.DrawImage(pole, 0, 0);
 		}
 
 		public void PaintPatch(PaintEventArgs e, Patch patch, Brush brush, bool border = false)

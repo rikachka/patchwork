@@ -22,6 +22,7 @@ namespace patchwork
 		public static Brush TimeBoardBrush = Brushes.Coral;
 		public static Pen TimeBoardBordersPen = Pens.White;
 		public static Pen TimeSpotBordersPen = new Pen(Color.Black, 1);
+		public static Pen ActivePlayerPen = new Pen(Color.Red, 4);
 		public static Brush TimeBoardPatchBrush = Brushes.Brown;
 		public static Brush ButtonBrush = Brushes.Black;
 		public static Brush InactiveBrush = new SolidBrush(Color.FromArgb(170, 120, 120, 120));
