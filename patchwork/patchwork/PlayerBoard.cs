@@ -49,7 +49,7 @@ namespace patchwork
 			picturebox_prize = (PictureBox)panel_prize.Controls[0];
 			picturebox_prize.Hide();
 			points = 7;
-			time = 19;
+			time = 0;
 			income = 0;
         }
 

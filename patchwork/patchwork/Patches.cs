@@ -35,7 +35,7 @@ namespace patchwork
 	class Patches
 	{
 		const int NOT_TAKEN = -1;
-		const int AVAILABLE_PATCHES_NUMBER = 50;
+		const int AVAILABLE_PATCHES_NUMBER = 3;
 
 		Panel panel_patches;
 		TableLayoutPanel table_layout_panel_main;
