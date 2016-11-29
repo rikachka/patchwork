@@ -201,7 +201,8 @@ namespace patchwork
 			Brush patch_brush = null;
 			bool border = false;
 
-			if ((patch_index >= AVAILABLE_PATCHES_NUMBER) || (active_player_points < patch.GetPrice()))
+			int max_available_index = FindMaxIndexOfAvaliablePatch();
+			if ((max_available_index < patch_index) || (active_player_points < patch.GetPrice()))
 			{
 				patch_brush = Constants.PatchInactiveBrush;
 			}
@@ -224,6 +225,25 @@ namespace patchwork
 			PaintPatchInField(patch_index, prev_squares_in_width);
 		}
 
+		public int FindMaxIndexOfAvaliablePatch()
+		{
+			int found_number = 0;
+			for (int patch_index = 0; patch_index < patches.Length; patch_index++)
+			{
+				Patch patch = patches[patch_index];
+				if (!patch.IsTaken())
+				{
+					found_number++;
+					if (found_number == AVAILABLE_PATCHES_NUMBER)
+					{
+						return patch_index;
+					}
+				}
+			}
+			//index последнего доступного
+			return patches.Length - 1;
+		}
+
 		int CountPrevSquaresWidth(int patch_index)
 		{
 			int prev_squares_in_width = 0;
@@ -238,8 +258,8 @@ namespace patchwork
 		{
 			int prev_squares_in_width = 0;
 
-			int max_patch_index = Math.Min(AVAILABLE_PATCHES_NUMBER, patches.Length); 
-			for (int patch_index = 0; patch_index < max_patch_index; patch_index++)
+			int max_patch_index = FindMaxIndexOfAvaliablePatch();
+			for (int patch_index = 0; patch_index <= max_patch_index; patch_index++)
 			{
 				Patch patch = patches[patch_index];
 				if (!patch.IsTaken())
