@@ -51,6 +51,7 @@ namespace patchwork
 			this.PictureBoxPrize.Show();
 
 			this.Invalidate();
+			InvalidateTableLayoutPanelMain();
 		}
 
         private void FormMain_Paint(object sender, PaintEventArgs e)
