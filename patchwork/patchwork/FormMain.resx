@@ -121,7 +121,7 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="PictureBoxPrize.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PictureBoxPlayerPrize.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEBcQFxAAD/7gAOQWRvYmUAZAAAAAAB/+EyAEV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQtdAAABAQADAAAAARELAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD
@@ -2597,7 +2597,7 @@
         +/BDkGYai+2v+f7LZZ3uTD+7HvUZPsyfNv1rkB9HxaRzKsv93/sW/WMr6BEvol7lfN02v//Z
 </value>
   </data>
-  <data name="PictureBoxPlayerPrize.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="PictureBoxPrize.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         /9j/4AAQSkZJRgABAQEBcQFxAAD/7gAOQWRvYmUAZAAAAAAB/+EyAEV4aWYAAE1NACoAAAAIAAwBAAAD
         AAAAAQtdAAABAQADAAAAARELAAABAgADAAAAAwAAAJ4BBgADAAAAAQACAAABEgADAAAAAQABAAABFQAD

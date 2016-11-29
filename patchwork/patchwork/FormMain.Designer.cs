@@ -45,28 +45,28 @@
 			this.TableLayoutPanelPlayer = new System.Windows.Forms.TableLayoutPanel();
 			this.PanelPlayerPoints = new System.Windows.Forms.Panel();
 			this.PanelPlayerPrize = new System.Windows.Forms.Panel();
+			this.PictureBoxPlayerPrize = new System.Windows.Forms.PictureBox();
 			this.PanelPlayerIncome = new System.Windows.Forms.Panel();
 			this.TableLayoutPanelBoard = new System.Windows.Forms.TableLayoutPanel();
 			this.PanelBoardPrize = new System.Windows.Forms.Panel();
+			this.PictureBoxPrize = new System.Windows.Forms.PictureBox();
+			this.PanelButtonOk = new System.Windows.Forms.Panel();
+			this.PanelButtonTime = new System.Windows.Forms.Panel();
 			this.TableLayoutPanelOpponent = new System.Windows.Forms.TableLayoutPanel();
 			this.PanelOpponentPoints = new System.Windows.Forms.Panel();
 			this.PanelOpponentPrize = new System.Windows.Forms.Panel();
-			this.PanelOpponentIncome = new System.Windows.Forms.Panel();
-			this.PanelButtonOk = new System.Windows.Forms.Panel();
-			this.PanelButtonTime = new System.Windows.Forms.Panel();
-			this.PictureBoxPrize = new System.Windows.Forms.PictureBox();
-			this.PictureBoxPlayerPrize = new System.Windows.Forms.PictureBox();
 			this.PictureBoxOpponentPrize = new System.Windows.Forms.PictureBox();
+			this.PanelOpponentIncome = new System.Windows.Forms.Panel();
 			this.MenuMain.SuspendLayout();
 			this.TableLayoutPanelMain.SuspendLayout();
 			this.TableLayoutPanelPlayer.SuspendLayout();
 			this.PanelPlayerPrize.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPlayerPrize)).BeginInit();
 			this.TableLayoutPanelBoard.SuspendLayout();
 			this.PanelBoardPrize.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).BeginInit();
 			this.TableLayoutPanelOpponent.SuspendLayout();
 			this.PanelOpponentPrize.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPlayerPrize)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxOpponentPrize)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -93,7 +93,7 @@
 			// MenuItemGameNew
 			// 
 			this.MenuItemGameNew.Name = "MenuItemGameNew";
-			this.MenuItemGameNew.Size = new System.Drawing.Size(152, 22);
+			this.MenuItemGameNew.Size = new System.Drawing.Size(98, 22);
 			this.MenuItemGameNew.Text = "New";
 			this.MenuItemGameNew.Click += new System.EventHandler(this.MenuItemGameNew_Click);
 			// 
@@ -106,7 +106,7 @@
 			// MenuItemGameExit
 			// 
 			this.MenuItemGameExit.Name = "MenuItemGameExit";
-			this.MenuItemGameExit.Size = new System.Drawing.Size(152, 22);
+			this.MenuItemGameExit.Size = new System.Drawing.Size(98, 22);
 			this.MenuItemGameExit.Text = "Exit";
 			this.MenuItemGameExit.Click += new System.EventHandler(this.MenuItemGameExit_Click);
 			// 
@@ -252,6 +252,21 @@
 			this.PanelPlayerPrize.Size = new System.Drawing.Size(67, 25);
 			this.PanelPlayerPrize.TabIndex = 3;
 			// 
+			// PictureBoxPlayerPrize
+			// 
+			this.PictureBoxPlayerPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+			this.PictureBoxPlayerPrize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxPlayerPrize.BackgroundImage")));
+			this.PictureBoxPlayerPrize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.PictureBoxPlayerPrize.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PictureBoxPlayerPrize.ErrorImage = null;
+			this.PictureBoxPlayerPrize.InitialImage = null;
+			this.PictureBoxPlayerPrize.Location = new System.Drawing.Point(3, 3);
+			this.PictureBoxPlayerPrize.Name = "PictureBoxPlayerPrize";
+			this.PictureBoxPlayerPrize.Size = new System.Drawing.Size(59, 17);
+			this.PictureBoxPlayerPrize.TabIndex = 1;
+			this.PictureBoxPlayerPrize.TabStop = false;
+			this.PictureBoxPlayerPrize.Visible = false;
+			// 
 			// PanelPlayerIncome
 			// 
 			this.PanelPlayerIncome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -295,6 +310,46 @@
 			this.PanelBoardPrize.TabIndex = 3;
 			this.PanelBoardPrize.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelBoardPrize_Paint);
 			// 
+			// PictureBoxPrize
+			// 
+			this.PictureBoxPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.PictureBoxPrize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxPrize.BackgroundImage")));
+			this.PictureBoxPrize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.PictureBoxPrize.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PictureBoxPrize.ErrorImage = null;
+			this.PictureBoxPrize.InitialImage = null;
+			this.PictureBoxPrize.Location = new System.Drawing.Point(3, 3);
+			this.PictureBoxPrize.Name = "PictureBoxPrize";
+			this.PictureBoxPrize.Size = new System.Drawing.Size(60, 17);
+			this.PictureBoxPrize.TabIndex = 0;
+			this.PictureBoxPrize.TabStop = false;
+			// 
+			// PanelButtonOk
+			// 
+			this.PanelButtonOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.PanelButtonOk.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.PanelButtonOk.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.PanelButtonOk.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PanelButtonOk.Location = new System.Drawing.Point(3, 202);
+			this.PanelButtonOk.Name = "PanelButtonOk";
+			this.PanelButtonOk.Size = new System.Drawing.Size(68, 25);
+			this.PanelButtonOk.TabIndex = 4;
+			this.PanelButtonOk.Click += new System.EventHandler(this.PanelButtonOk_Click);
+			this.PanelButtonOk.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelButtonOk_Paint);
+			// 
+			// PanelButtonTime
+			// 
+			this.PanelButtonTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.PanelButtonTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.PanelButtonTime.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.PanelButtonTime.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PanelButtonTime.Location = new System.Drawing.Point(151, 202);
+			this.PanelButtonTime.Name = "PanelButtonTime";
+			this.PanelButtonTime.Size = new System.Drawing.Size(68, 25);
+			this.PanelButtonTime.TabIndex = 5;
+			this.PanelButtonTime.Click += new System.EventHandler(this.PanelButtonTime_Click);
+			this.PanelButtonTime.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelButtonTime_Paint);
+			// 
 			// TableLayoutPanelOpponent
 			// 
 			this.TableLayoutPanelOpponent.ColumnCount = 3;
@@ -337,72 +392,6 @@
 			this.PanelOpponentPrize.Size = new System.Drawing.Size(68, 25);
 			this.PanelOpponentPrize.TabIndex = 4;
 			// 
-			// PanelOpponentIncome
-			// 
-			this.PanelOpponentIncome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-			this.PanelOpponentIncome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.PanelOpponentIncome.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PanelOpponentIncome.Location = new System.Drawing.Point(151, 202);
-			this.PanelOpponentIncome.Name = "PanelOpponentIncome";
-			this.PanelOpponentIncome.Size = new System.Drawing.Size(69, 25);
-			this.PanelOpponentIncome.TabIndex = 5;
-			this.PanelOpponentIncome.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponentIncome_Paint);
-			// 
-			// PanelButtonOk
-			// 
-			this.PanelButtonOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.PanelButtonOk.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.PanelButtonOk.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.PanelButtonOk.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PanelButtonOk.Location = new System.Drawing.Point(3, 202);
-			this.PanelButtonOk.Name = "PanelButtonOk";
-			this.PanelButtonOk.Size = new System.Drawing.Size(68, 25);
-			this.PanelButtonOk.TabIndex = 4;
-			this.PanelButtonOk.Click += new System.EventHandler(this.PanelButtonOk_Click);
-			this.PanelButtonOk.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelButtonOk_Paint);
-			// 
-			// PanelButtonTime
-			// 
-			this.PanelButtonTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.PanelButtonTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.PanelButtonTime.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.PanelButtonTime.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PanelButtonTime.Location = new System.Drawing.Point(151, 202);
-			this.PanelButtonTime.Name = "PanelButtonTime";
-			this.PanelButtonTime.Size = new System.Drawing.Size(68, 25);
-			this.PanelButtonTime.TabIndex = 5;
-			this.PanelButtonTime.Click += new System.EventHandler(this.PanelButtonTime_Click);
-			this.PanelButtonTime.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelButtonTime_Paint);
-			// 
-			// PictureBoxPrize
-			// 
-			this.PictureBoxPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-			this.PictureBoxPrize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxPrize.BackgroundImage")));
-			this.PictureBoxPrize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.PictureBoxPrize.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PictureBoxPrize.ErrorImage = null;
-			this.PictureBoxPrize.InitialImage = null;
-			this.PictureBoxPrize.Location = new System.Drawing.Point(3, 3);
-			this.PictureBoxPrize.Name = "PictureBoxPrize";
-			this.PictureBoxPrize.Size = new System.Drawing.Size(60, 17);
-			this.PictureBoxPrize.TabIndex = 0;
-			this.PictureBoxPrize.TabStop = false;
-			// 
-			// PictureBoxPlayerPrize
-			// 
-			this.PictureBoxPlayerPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-			this.PictureBoxPlayerPrize.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("PictureBoxPlayerPrize.BackgroundImage")));
-			this.PictureBoxPlayerPrize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.PictureBoxPlayerPrize.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.PictureBoxPlayerPrize.ErrorImage = null;
-			this.PictureBoxPlayerPrize.InitialImage = null;
-			this.PictureBoxPlayerPrize.Location = new System.Drawing.Point(3, 3);
-			this.PictureBoxPlayerPrize.Name = "PictureBoxPlayerPrize";
-			this.PictureBoxPlayerPrize.Size = new System.Drawing.Size(59, 17);
-			this.PictureBoxPlayerPrize.TabIndex = 1;
-			this.PictureBoxPlayerPrize.TabStop = false;
-			this.PictureBoxPlayerPrize.Visible = false;
-			// 
 			// PictureBoxOpponentPrize
 			// 
 			this.PictureBoxOpponentPrize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -418,6 +407,17 @@
 			this.PictureBoxOpponentPrize.TabStop = false;
 			this.PictureBoxOpponentPrize.Visible = false;
 			// 
+			// PanelOpponentIncome
+			// 
+			this.PanelOpponentIncome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+			this.PanelOpponentIncome.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.PanelOpponentIncome.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.PanelOpponentIncome.Location = new System.Drawing.Point(151, 202);
+			this.PanelOpponentIncome.Name = "PanelOpponentIncome";
+			this.PanelOpponentIncome.Size = new System.Drawing.Size(69, 25);
+			this.PanelOpponentIncome.TabIndex = 5;
+			this.PanelOpponentIncome.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelOpponentIncome_Paint);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -426,6 +426,7 @@
 			this.Controls.Add(this.MenuMain);
 			this.Controls.Add(this.TableLayoutPanelMain);
 			this.MainMenuStrip = this.MenuMain;
+			this.MinimumSize = new System.Drawing.Size(350, 200);
 			this.Name = "FormMain";
 			this.Text = "Patchwork";
 			this.TransparencyKey = System.Drawing.Color.Lime;
@@ -436,12 +437,12 @@
 			this.TableLayoutPanelMain.ResumeLayout(false);
 			this.TableLayoutPanelPlayer.ResumeLayout(false);
 			this.PanelPlayerPrize.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPlayerPrize)).EndInit();
 			this.TableLayoutPanelBoard.ResumeLayout(false);
 			this.PanelBoardPrize.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).EndInit();
 			this.TableLayoutPanelOpponent.ResumeLayout(false);
 			this.PanelOpponentPrize.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPrize)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.PictureBoxPlayerPrize)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.PictureBoxOpponentPrize)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
